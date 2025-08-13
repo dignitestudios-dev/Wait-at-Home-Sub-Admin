@@ -1,0 +1,8 @@
+/* All the Global CSS code goes here */
+
+.bg-image{
+    background: url('./assets/bgauth.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
