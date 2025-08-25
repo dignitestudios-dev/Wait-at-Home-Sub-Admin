@@ -5,6 +5,8 @@ import PushNotification from "../../pages/subadmin/app/PushNotification";
 import Users from "../../pages/subadmin/app/Users";
 import Enrollment from "../../pages/subadmin/app/Enrollment";
 import Chat from "../../pages/subadmin/app/Chat";
+import SubAdmin from "../../pages/superadmin/SubAdmin";
+import SubAdminDetail from "../../pages/superadmin/SubAdminDetail";
 
 export const AppRoutes = [
   {
@@ -30,6 +32,14 @@ export const AppRoutes = [
   {
     url: "enrollment",
     page: <Enrollment />,
+  },
+  {
+    url: "sub-admin",
+    page: <SubAdmin />,
+  },
+  {
+    url: "sub-admin-detail/:id",
+    page: <SubAdminDetail />,
   },
   {
     url: "chat",

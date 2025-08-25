@@ -25,6 +25,7 @@ const Login = () => {
         const data = {
           email: values?.email,
           password: values?.password,
+          role: "subadmin",
         };
         navigate("/app/dashboard");
         // postData("/admin/login", false, null, data, processLogin);

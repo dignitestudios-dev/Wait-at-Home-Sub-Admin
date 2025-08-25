@@ -20,6 +20,11 @@ export const sidebarData = [
     link: "/app/chat",
   },
   {
+    title: "Sub Admins",
+    // icon: "home", Use this if you want to add icons
+    link: "/app/sub-admin",
+  },
+  {
     title: "Push notifications",
     // icon: "home", Use this if you want to add icons
     link: "/app/push-notification",

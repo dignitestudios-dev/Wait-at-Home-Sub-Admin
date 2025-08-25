@@ -17,8 +17,10 @@ import IconDog from "./icondog.png";
 import ChatAccept from "./chataccept.png";
 import ChatClose from "./chatclose.png";
 import Logout from "./logout.png";
+import EditIcon from "./edit.png";
 export {
   Logo,
+  EditIcon,
   IconCat,
   IconDog,
   NoInternetImage,
@@ -36,5 +38,5 @@ export {
   UserPro,
   ChatAccept,
   ChatClose,
-  Logout
+  Logout,
 };
