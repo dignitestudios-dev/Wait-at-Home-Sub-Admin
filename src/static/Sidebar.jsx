@@ -10,7 +10,7 @@ export const sidebarData = [
     link: "/app/users",
   },
   {
-    title: "Enrollment",
+    title: "Waiting List",
     // icon: "home", Use this if you want to add icons
     link: "/app/enrollment",
   },
@@ -30,6 +30,12 @@ export const sidebarData = [
     link: "/app/push-notification",
   },
 ];
+
+
+
+
+
+
 export const users = [
   {
     id: 1,

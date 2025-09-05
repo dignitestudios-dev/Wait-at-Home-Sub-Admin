@@ -1,81 +1,130 @@
 import React from "react";
 import { FaCheck, FaTimes } from "react-icons/fa";
-import { UserPro } from "../../../../assets/export";
 
-const users = [
-  { id: 1, time: "20:59", status: "default", image: UserPro },
-  { id: 2, time: "22:59", status: "default", image: UserPro },
-  { id: 3, time: "15:25", status: "default", image: UserPro },
-  { id: 4, time: "Cancelled", status: "default", image: UserPro },
-  { id: 5, time: "25:30", status: "default", image: UserPro },
-  {
-    id: 6,
-    time: "-15:59",
-    status: "pending",
-    image: UserPro,
-  },
-  {
-    id: 7,
-    time: "-5:00",
-    status: "pending",
-    image: UserPro,
-  },
-  {
-    id: 8,
-    time: "-2:45",
-    status: "pending",
-    image: UserPro,
-  },
-  { id: 9, time: "", status: "default", image: UserPro },
-  { id: 10, time: "", status: "default", image: UserPro },
-  { id: 11, time: "", status: "default", image: UserPro },
-  { id: 12, time: "", status: "default", image: UserPro },
-  { id: 13, time: "", status: "default", image: UserPro },
-];
+const EnrollmentSlider = ({
+  handleCancel,
+  data,
+  setSelectedId,
+  handleComplete,
+  completeLoading,
+  selectedId,
+  setSelectedComplete,
+}) => {
+  // Group users
+  const cancelledOrCompleted = data?.All?.filter(
+    (u) =>
+      u.AppointmentStatus === "cancelled" || u.AppointmentStatus === "completed"
+  );
+  // Get today's date (yyyy-mm-dd format)
+  const today = new Date().toISOString().split("T")[0];
 
-const EnrollmentSlider = ({ handleCancel }) => {
+  // Currently serving filter (only today)
+  const currentlyServing = data?.All?.filter(
+    (u) => u.currentlyServing === true && u.AppointmentDate?.split("T")[0] === today
+  );
+
+const pendingUsers = data?.All?.filter(
+  (u) =>
+    u.AppointmentStatus === "pending" &&
+    new Date(u.AppointmentDate).toISOString().split("T")[0] === today
+);
   return (
     <div className="bg-[#FFFFFF59] p-6 rounded-3xl shadow-md w-full overflow-hidden mt-4">
       <div className="flex items-center gap-5 overflow-x-auto no-scrollbar">
-        {users.map((user, index) => (
-          <div
-            key={user.id}
-            className={`flex flex-col h-[154px]  items-center justify-center text-center transition duration-300 ${
-              user.status === "pending"
-                ? "bg-[#FFFFFF59]  w-[104px] px-4 py-4 rounded-[12px] shadow-sm"
-                : "opacity-40"
-            }`}
-          >
-            <img
-              src={user.image}
-              className={`w-[55px] h-[55px] rounded-full border-2 ${
-                user.status === "pending"
-                  ? "border-[#5E2E86]"
-                  : "border-transparent"
-              }`}
-              alt="user"
-            />
-            <p className="text-xs text-[#000000] font-[600] mt-1 text-[14.24px] ">
-              {user.time}
-            </p>
-            {user.status === "pending" && (
-              <div className="flex gap-2 mt-2">
-                <button
-                  onClick={handleCancel}
-                  className="w-[32px] h-[32px] bg-[#EE3131] text-white rounded-[8px] flex items-center justify-center"
-                >
-                  <FaTimes size={20} />
-                </button>
-                <button className="w-[32px] h-[32px] bg-[#28A745] text-white rounded-[8px] flex items-center justify-center">
-                  <FaCheck size={20} />
-                </button>
+        {/* LEFT: cancelled / completed */}
+        {cancelledOrCompleted?.slice(0, 4).map((user, index) => (
+          <div key={index} className="flex flex-col items-center opacity-40">
+            {user.signUpRecord?.profilePicture ? (
+              <img
+                src={user.signUpRecord.profilePicture}
+                className="w-[55px] h-[55px] rounded-full"
+                alt={user.signUpRecord?.name}
+              />
+            ) : (
+              <div className="w-[55px] h-[55px] rounded-full bg-[#00AAAD] flex items-center justify-center text-white font-bold text-lg">
+                {user.signUpRecord?.name?.substring(0, 2).toUpperCase()}
               </div>
             )}
+            <p className="text-xs font-[600] mt-1">{user.AppointmentStatus}</p>
+          </div>
+        ))}
+
+        {/* CENTER: currently serving */}
+        {currentlyServing?.map((user, index) => (
+          <div
+            key={index}
+            className="flex flex-col h-[154px] items-center justify-center text-center bg-[#FFFFFF59] w-[104px] px-4 py-4 rounded-[12px] shadow-sm"
+          >
+            {user?.signUpRecord?.profilePicture ? (
+              <img
+                src={user.signUpRecord.profilePicture}
+                className="w-[55px] h-[55px] rounded-full"
+                alt={user.signUpRecord?.name}
+              />
+            ) : (
+              <div className="w-[55px] h-[55px] rounded-full bg-[#00AAAD] flex items-center justify-center text-white font-bold text-lg">
+                {user?.signUpRecord?.name?.substring(0, 2).toUpperCase()}
+              </div>
+            )}
+            <p className="text-xs text-[#000000] font-[600] mt-1">
+              -{user?.appointmentDuration} min
+            </p>
+
+            {/* Buttons */}
+            <div className="flex gap-2 mt-2">
+              <button
+                onClick={() => {
+                  setSelectedId(user?._id);
+                  handleCancel(user?._id);
+                }}
+                className="w-[32px] h-[32px] bg-[#EE3131] text-white rounded-[8px] flex items-center justify-center"
+              >
+                <FaTimes size={20} />
+              </button>
+              <button
+                onClick={() => {
+                  setSelectedId(user._id);
+                  setSelectedComplete(user);
+                  handleComplete(user);
+                }}
+                className="w-[32px] h-[32px] bg-[#28A745] text-white rounded-[8px] flex items-center justify-center"
+              >
+                {completeLoading && selectedId === user._id ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent border-solid rounded-full animate-spin"></div>
+                ) : (
+                  <FaCheck size={20} />
+                )}
+              </button>
+            </div>
+          </div>
+        ))}
+
+        {/* RIGHT: pending */}
+        {pendingUsers?.slice(0, 4).map((user, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center justify-center text-center opacity-40"
+          >
+            {user?.signUpRecord?.profilePicture ? (
+              <img
+                src={user.signUpRecord?.profilePicture}
+                className="w-[55px] h-[55px] rounded-full"
+                alt={user.signUpRecord?.name}
+              />
+            ) : (
+              <div className="w-[55px] h-[55px] rounded-full bg-[#00AAAD] flex items-center justify-center text-white font-bold text-lg">
+                {user?.signUpRecord?.name?.substring(0, 2).toUpperCase()}
+              </div>
+            )}
+            <p className="text-xs text-[#5E2E86] font-[600] mt-1">
+              {user?.appointmentDuration} min
+            </p>
           </div>
         ))}
       </div>
+
       <div className="text-[16px] font-[600] text-right mt-3 text-[#000000]">
-        Total: {users.length}
+        Total: {data?.Total}
       </div>
     </div>
   );

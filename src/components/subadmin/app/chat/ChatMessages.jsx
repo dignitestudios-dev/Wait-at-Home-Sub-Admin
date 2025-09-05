@@ -1,118 +1,91 @@
-import React from "react";
-import { ChatAccept, ChatClose, UserPro } from "../../../../assets/export";
+import React, { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../../../context/AppContext";
+import { listenToMessages, sendMessage } from "../../../../firebase/messages";
+import PendingChatView from "./PendingChatView";
+import InitializedChatView from "./InitializedChatView";
+import MessageInput from "./MessageInput";
 import { LiaCheckDoubleSolid } from "react-icons/lia";
-import { MdCheck } from "react-icons/md";
-import { IoSend } from "react-icons/io5";
 
 const ChatMessages = ({
   chatSiderBarTab,
   handleStartChat,
   setViewResponseModal,
+  selectedChat,
 }) => {
-  return (
-    <div>
-      <div className="bg-[#FFFFFF66]  rounded-bl-[16px] rounded-br-[16px]">
-        <div className="flex-1 p-6 overflow-y-auto space-y-4">
-          <div className="flex flex-col">
-            <div className="flex items-center mb-1">
-              <img src={UserPro} alt="" className="w-8 h-8 rounded-full mr-2" />
-              <span className="text-[14px] text-[#000000] font-[600] ">
-                John Doe
-              </span>
-            </div>
-            <div className="w-full">
-              <div className="bg-[#FFFFFF80] mx-8 px-4 py-2 text-[#000000] rounded-xl text-[14px] font-[400] shadow-sm max-w-xs">
-                labore et dolore magna aliqua.
-              </div>
-              <div className="text-[10px] text-[#A4A4A4]  ">09:25 AM</div>
-            </div>
-          </div>
+  const { userId } = useContext(AppContext);
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
 
-          <div className="flex justify-end">
-            <div className="bg-[#00AAAD] text-white px-4 py-2 rounded-xl max-w-xs">
-              Hello! John Doe
-            </div>
-          </div>
+  useEffect(() => {
+    if (!selectedChat?.id) return;
+    const unsubscribe = listenToMessages(selectedChat.id, setMessages);
+    return () => unsubscribe();
+  }, [selectedChat?.id]);
 
-          <div className="flex justify-end">
-            <div className="bg-[#00AAAD] border rounded-tl-[24px] rounded-bl-[24px] rounded-br-[24px] p-4  shadow-sm">
-              <div className="flex items-center gap-10 mb-2">
-                <div className="flex items-center gap-3">
-                  <div className="w-[45px] h-[45px] rounded-full border-2 border-[#FFFFFF] flex items-center justify-center text-white">
-                    <MdCheck size={29} />
-                  </div>
-                  <span className="font-[600] text-[16px] text-white ">
-                    Response Submitted
-                  </span>
-                </div>
-                <span
-                  onClick={() => setViewResponseModal(true)}
-                  className="text-[#FFFFFF] text-[14px] font-[500] underline"
-                >
-                  View Response
-                </span>
-              </div>
-            </div>
-          </div>
-          {chatSiderBarTab === "Chat" ? (
-            <>
-              <div className="flex justify-center gap-2 mx-auto h-[48px] items-center w-[187px] px-4 py-2 bg-[#FFFFFF59] text-[#000000] font-[500] text-[14px] rounded-full">
-                <LiaCheckDoubleSolid size={22} /> Chat Started
-              </div>
+  const handleSend = async () => {
+    await sendMessage(selectedChat?.id, newMessage, userId);
+    setNewMessage("");
+  };
 
-              <div className="flex flex-col">
-                <div className="flex items-center mb-1">
-                  <img
-                    src={UserPro}
-                    alt=""
-                    className="w-8 h-8 rounded-full mr-2"
-                  />
-                  <span className="text-[14px] text-[#000000] font-[600] ">
-                    John Doe
-                  </span>
-                </div>
-                <div className="w-full">
-                  <div className="bg-[#FFFFFF80] mx-8 px-4 py-2 text-[#000000] rounded-xl text-[14px] font-[400] shadow-sm max-w-xs">
-                    labore et dolore magna aliqua.
-                  </div>
-                  <div className="bg-[#FFFFFF80] mt-3 mx-8 px-4 py-2 text-[#000000] rounded-xl text-[14px] font-[400] shadow-sm max-w-xs">
-                    Sed ut perspiciatis
-                  </div>
-                  <div className="text-[10px] text-[#A4A4A4]  ">09:25 AM</div>
-                </div>
-              </div>
-              <div className="p-4 bg-white border-t rounded-bl-[16px] rounded-br-[16px]   flex gap-4 items-center">
-                <input
-                  type="text"
-                  placeholder="Type Message"
-                  className="flex-1 border border-[#00AAAD] rounded-[8px] px-4 py-2 focus:outline-none"
-                />
-                <button className=" bg-[#00AAAD] text-white p-3 rounded-full">
-                  <IoSend size={20} />
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="flex  justify-center ">
-                <button
-                  onClick={handleStartChat}
-                  className="px-4 flex items-center gap-2 py-2 font-[500]  h-[47px]  rounded-tl-[20px] rounded-bl-[20px] bg-[#5E2E86] text-white text-[14px]"
-                >
-                  <img src={ChatAccept} className="w-[24px] h-[24px] " alt="" />{" "}
-                  Start Chat
-                </button>
-                <button className="px-4 flex items-center gap-2 py-2 font-[500]  h-[47px]  rounded-tr-[20px] rounded-br-[20px] bg-[#7ACCC8] text-white text-[14px]">
-                  <img src={ChatClose} className="w-[24px] h-[24px] " alt="" />{" "}
-                  Ignore chat
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+  if (!selectedChat) {
+    return (
+      <div className="flex justify-center items-center h-full text-gray-500 text-sm">
+        {chatSiderBarTab === "Requests"
+          ? "No pending requests found."
+          : "No active chat selected."}
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (selectedChat?.chatStatus === "pending") {
+    return (
+      <PendingChatView
+        selectedChat={selectedChat}
+        onStartChat={handleStartChat}
+        setViewResponseModal={setViewResponseModal}
+      />
+    );
+  }
+
+  if (
+    selectedChat?.chatStatus === "initialized" ||
+    selectedChat?.chatStatus === "finished"
+  ) {
+    return (
+      <div className="relative">
+        <div className="bg-[#FFFFFF66] rounded-bl-[16px] rounded-br-[16px] flex flex-col h-screen custom-scrollbar overflow-y-auto max-h-[80vh] pb-[60px]">
+          <div className="p-2">
+            <InitializedChatView
+              selectedChat={selectedChat}
+              messages={messages}
+              userId={userId}
+              newMessage={newMessage}
+              setNewMessage={setNewMessage}
+              handleSend={handleSend}
+              setViewResponseModal={setViewResponseModal}
+            />
+          </div>
+        </div>
+
+        {/* Input */}
+        {selectedChat?.chatStatus === "finished" ? (
+          <div className="flex justify-center relative bottom-20 right-0 left-0 gap-2 mx-auto my-2 h-[40px] items-center w-[187px] px-4 py-2 bg-[#FFFFFF59] text-[#000000] font-[500] text-[14px] rounded-full">
+            <LiaCheckDoubleSolid size={22} /> Chat Finished
+          </div>
+        ) : (
+          <div className="absolute left-0 right-0 bottom-0">
+            <MessageInput
+              newMessage={newMessage}
+              setNewMessage={setNewMessage}
+              handleSend={handleSend}
+            />
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default ChatMessages;

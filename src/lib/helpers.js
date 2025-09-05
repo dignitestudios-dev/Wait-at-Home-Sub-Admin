@@ -17,3 +17,17 @@ export const phoneFormater = (input) => {
 
   return cleaned; // Return cleaned number if less than 1 digit
 };
+export const formatTime = (timestamp) => {
+  if (!timestamp) return "";
+
+  // Agar firestore ka timestamp object mila hai
+  const secs = timestamp.seconds || timestamp._seconds;
+  if (!secs) return "";
+
+  const date = new Date(secs * 1000);
+  return date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+};

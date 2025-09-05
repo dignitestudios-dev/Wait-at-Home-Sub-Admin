@@ -5,28 +5,28 @@ import {
   UserIcon,
 } from "../../../../../assets/export";
 
-const cards = [
-  {
-    title: "Total Users",
-    value: 1025,
-    img: UserIcon,
-    color: "from-[#684D7B]/2 to-white/10",
-  },
-  {
-    title: "Appointments",
-    value: 26,
-    img: AppoitmentIcon,
-    color: "from-white/10 to-white/10",
-  },
-  {
-    title: "Chat Requests",
-    value: 25,
-    img: ChatRequestIcon,
-    color: "from-white/10 to-white/10",
-  },
-];
+const StateCards = ({ data }) => {
+  const cards = [
+    {
+      title: "Total Users",
+      value: data?.totalUsers,
+      img: UserIcon,
+      color: "from-[#684D7B]/2 to-white/10",
+    },
+    {
+      title: "Bookings",
+      value: data?.totalAppointments,
+      img: AppoitmentIcon,
+      color: "from-white/10 to-white/10",
+    },
+    {
+      title: "Chat Requests",
+      value: 25,
+      img: ChatRequestIcon,
+      color: "from-white/10 to-white/10",
+    },
+  ];
 
-const StateCards = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {cards.map((card, index) => (

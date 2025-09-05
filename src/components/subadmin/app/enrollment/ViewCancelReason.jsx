@@ -1,10 +1,7 @@
 import React from "react";
 import { RxCross2 } from "react-icons/rx";
 
-const ViewCancelReason = ({
-  isOpen,
-  onClose,
-}) => {
+const ViewCancelReason = ({ isOpen, onClose, selectedCancel }) => {
   if (!isOpen) return null;
 
   return (
@@ -25,6 +22,7 @@ const ViewCancelReason = ({
         <textarea
           placeholder="Write here"
           disabled
+          value={selectedCancel}
           className={`bg-gray-100 cursor-not-allowed opacity-60 w-full mt-7 rounded-[20px] h-[113px] px-4 py-4 border `}
         ></textarea>
       </div>

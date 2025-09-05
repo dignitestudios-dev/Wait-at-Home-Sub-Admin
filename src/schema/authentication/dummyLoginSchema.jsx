@@ -4,8 +4,8 @@ export const signInSchema = Yup.object({
   email: Yup.string()
     .email("Please enter a valid email address.")
     .required("Please enter your email"),
-  password: Yup.string()
-    .matches(/^(?!\s)(?!.*\s$)/, "Password must not begin or end with spaces")
-    .min(6, "Password must contain atleast 6 alphanumeric characters.")
-    .required("Please enter your password"),
+  password: Yup.string().matches(
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+    "Password must be at least 8 characters, include 1 uppercase letter, 1 number, and 1 special character"
+  ),
 });

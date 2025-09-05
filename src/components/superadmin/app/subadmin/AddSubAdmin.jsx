@@ -14,6 +14,7 @@ const AddSubAdmin = ({
   handleBlur,
   errors,
   touched,
+  loading,
 }) => {
   if (!isOpen) return null;
 
@@ -69,7 +70,7 @@ const AddSubAdmin = ({
           />
           <hr />
           <h2 className="text-[14px] font-[600] ">Credentials</h2>
-      
+
           <GlobalInputs
             placeholder="Password"
             value={values.password}
@@ -82,7 +83,7 @@ const AddSubAdmin = ({
             touched={touched.password}
             max={50}
           />
-          <GlobalButton type="submit" children={"Update"} />
+          <GlobalButton loading={loading} type="submit" children={"Update"} />
         </form>
       </div>
     </div>

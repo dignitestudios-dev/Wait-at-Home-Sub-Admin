@@ -5,9 +5,15 @@ import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 
 const Sidebar = () => {
-  const { handleLogout } = useContext(AppContext);
+  const { handleLogout, role } = useContext(AppContext);
+
+  // Filter data based on role
+  const filteredSidebar = role === "sub-admin" 
+    ? sidebarData.filter(item => item.title !== "Sub Admins")
+    : sidebarData;
+
   return (
-    <div className="w-[282px] h-full rounded-[30px]  mt-3 bg-gradient-to-tl from-[#684D7B] to-[#10C0B6] overflow-y-auto px-4 py-6 flex flex-col gap-4 items-start">
+    <div className="w-[282px] h-full rounded-[30px] mt-3 bg-gradient-to-tl from-[#684D7B] to-[#10C0B6] overflow-y-auto px-4 py-6 flex flex-col gap-4 items-start">
       <div className="w-full flex justify-center mb-6">
         <img
           src={LogoDashboard}
@@ -16,24 +22,25 @@ const Sidebar = () => {
         />
       </div>
 
-      {sidebarData?.map((sidebar) => (
+      {filteredSidebar?.map((sidebar) => (
         <NavLink
           key={sidebar?.link}
           to={sidebar?.link}
           className={({ isActive }) =>
             isActive
-              ? "text-[16px]  w-full h-[46px] flex items-center justify-start pl-4 border bg-white text-[#5E2E86] rounded-[16px] font-[600] transition-all duration-150"
-              : "text-[16px] w-full mt-2 flex items-center justify-start pl-4  text-white border-white rounded-[16px] font-[500]  transition-all duration-150"
+              ? "text-[16px] w-full h-[46px] flex items-center justify-start pl-4 border bg-white text-[#5E2E86] rounded-[16px] font-[600] transition-all duration-150"
+              : "text-[16px] w-full mt-2 flex items-center justify-start pl-4 text-white border-white rounded-[16px] font-[500] transition-all duration-150"
           }
         >
           {sidebar?.title}
         </NavLink>
       ))}
+
       <button
         onClick={handleLogout}
-        className="mt-auto flex justify-center items-center gap-3 text-[18px] w-full h-[46px] bg-[#FFFFFF]  text-[#EE3131] font-[500] rounded-[16px] transition-all duration-150"
+        className="mt-auto flex justify-center items-center gap-3 text-[18px] w-full h-[46px] bg-[#FFFFFF] text-[#EE3131] font-[500] rounded-[16px] transition-all duration-150"
       >
-        <img src={Logout} className="w-[24px] h-[24px] " alt="" /> Logout
+        <img src={Logout} className="w-[24px] h-[24px]" alt="" /> Logout
       </button>
     </div>
   );

@@ -1,8 +1,9 @@
 import React from "react";
 import { Tick } from "../../../../assets/export";
 import { GoAlert } from "react-icons/go";
+import { FaSpinner } from "react-icons/fa";
 
-const FinishChatModal = ({ isOpen, onClose, handleChatEnd }) => {
+const FinishChatModal = ({ isOpen, onClose, handleChatEnd, endNowLoader }) => {
   if (!isOpen) return null;
 
   return (
@@ -25,7 +26,7 @@ const FinishChatModal = ({ isOpen, onClose, handleChatEnd }) => {
             onClick={handleChatEnd}
             className="h-[48px] text-[#00AAAD] w-[203px]  bg-white rounded-[12px] "
           >
-            End now
+            {endNowLoader ? <FaSpinner /> : " End now"}
           </button>
           <button
             onClick={onClose}

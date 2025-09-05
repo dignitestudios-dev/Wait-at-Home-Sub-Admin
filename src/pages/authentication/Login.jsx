@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { useLogin } from "../../hooks/api/Post";
-import { processLogin } from "../../lib/utils";
+import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import { loginValues } from "../../init/authentication/dummyLoginValues";
 import { signInSchema } from "../../schema/authentication/dummyLoginSchema";
@@ -8,27 +6,41 @@ import { NavLink, useNavigate } from "react-router";
 import { Logo } from "../../assets/export";
 import GlobalInputs from "../../components/global/GlobalInputs";
 import GlobalButton from "../../components/global/GlobalButton";
-
+import axios from "../../axios";
+import { AppContext } from "../../context/AppContext";
+import { ErrorToast, SuccessToast } from "../../components/global/Toaster";
 const Login = () => {
   const navigate = useNavigate();
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-  const { loading, postData } = useLogin();
-
+  const [loading, setLoading] = useState(false);
+  const { Auth, fcmToken } = useContext(AppContext);
+  console.log(fcmToken, "fcmToken==>");
   const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
     useFormik({
       initialValues: loginValues,
       validationSchema: signInSchema,
       validateOnChange: true,
       validateOnBlur: true,
-      onSubmit: async (values, action) => {
+      onSubmit: async (values) => {
         const data = {
           email: values?.email,
           password: values?.password,
-          role: "subadmin",
+          role: "admin",
+          fcmToken: fcmToken,
         };
-        navigate("/app/dashboard");
-        // postData("/admin/login", false, null, data, processLogin);
+
+        setLoading(true);
+        try {
+          const response = await axios.post("/admin/admin-signin", data);
+          if (response?.status === 200) {
+            SuccessToast(response?.data?.message);
+            Auth(response?.data);
+            navigate("/app/dashboard");
+          }
+        } catch (error) {
+          ErrorToast(error?.response?.data?.message);
+        } finally {
+          setLoading(false);
+        }
       },
     });
 
@@ -92,7 +104,7 @@ const Login = () => {
           </NavLink>
         </div>
         <div className="w-[426px]">
-          <GlobalButton children={"Login"} type="submit" />
+          <GlobalButton loading={loading} children={"Login"} type="submit" />
         </div>
       </form>
     </div>

@@ -8,6 +8,7 @@ const NotificationForm = ({
   handleBlur,
   handleChange,
   handleSubmit,
+  loading,
 }) => {
   return (
     <div>
@@ -55,7 +56,7 @@ const NotificationForm = ({
             </p>
           )}
           <button className="bg-[#5E2E86] font-[600]  text-[16px] w-[220px] h-[48px] text-white rounded-[16px] ">
-            Push
+            {loading ? "Sending..." : "Push"}
           </button>
         </div>
       </form>

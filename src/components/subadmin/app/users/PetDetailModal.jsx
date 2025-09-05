@@ -4,7 +4,7 @@ import GlobalInputs from "../../../global/GlobalInputs";
 import { IoChevronDown } from "react-icons/io5";
 import GlobalButton from "../../../global/GlobalButton";
 
-const PetDetailModal = ({ isOpen, onClose }) => {
+const PetDetailModal = ({ isOpen, onClose, petData }) => {
   if (!isOpen) return null;
 
   return (
@@ -25,7 +25,7 @@ const PetDetailModal = ({ isOpen, onClose }) => {
         <form className="space-y-3 mt-4">
           <GlobalInputs
             placeholder="Pet’s Name"
-            value=""
+            value={petData?.petName}
             type="text"
             name="petName"
             id="petName"
@@ -34,13 +34,16 @@ const PetDetailModal = ({ isOpen, onClose }) => {
             error={null}
             touched={false}
             max={50}
+            disabled
           />
 
           <div className="relative w-full">
             <select
+              value={petData?.petType || ""}
               name="petType"
               id="petType"
-              className="appearance-none w-full rounded-xl px-4 py-3 h-[49px] pr-10 text-[14px] bg-white text-[#616161] border focus:border-[#10C0B6] focus:ring-2 focus:ring-[#10C0B6]"
+              disabled
+              className="appearance-none w-full rounded-xl px-4 py-3 h-[49px] pr-10 text-[14px] bg-white text-[#616161] border focus:border-[#10C0B6] focus:ring-2 focus:ring-[#10C0B6] cursor-not-allowed"
             >
               <option value="">Pet Type</option>
               <option value="dog">Dog</option>
@@ -56,7 +59,7 @@ const PetDetailModal = ({ isOpen, onClose }) => {
 
           <GlobalInputs
             placeholder="Pet Breed"
-            value=""
+            value={petData?.petBreed || ""}
             type="text"
             name="petBreed"
             id="petBreed"
@@ -65,11 +68,12 @@ const PetDetailModal = ({ isOpen, onClose }) => {
             error={null}
             touched={false}
             max={50}
+            disabled
           />
 
           <GlobalInputs
             placeholder="Pet Age"
-            value=""
+            value={petData?.petAge || ""}
             type="text"
             name="petAge"
             id="petAge"
@@ -77,13 +81,15 @@ const PetDetailModal = ({ isOpen, onClose }) => {
             onBlur={() => {}}
             error={null}
             touched={false}
+            disabled
           />
           <textarea
-            name=""
-            className="w-full rounded-xl pr-11 px-4 py-3 mb-1 text-[14px] font-[400] bg-white placeholder:text-[#616161] outline-none border transition"
-            id=""
+            name="symptoms"
+            value={petData?.symptoms || ""}
+            className="w-full rounded-xl px-4 py-3 mb-1 text-[14px] font-[400] bg-gray-100 cursor-not-allowed opacity-60 placeholder:text-[#616161] outline-none border transition resize-none "
             placeholder="Symptoms or Reasons for the visit"
             rows={4}
+            disabled
           ></textarea>
         </form>
       </div>

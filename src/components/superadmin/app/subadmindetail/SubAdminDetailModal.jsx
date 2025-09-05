@@ -14,6 +14,7 @@ const SubAdminDetailModal = ({
   handleBlur,
   errors,
   touched,
+  updateLoading,
 }) => {
   if (!isOpen) return null;
 
@@ -22,7 +23,7 @@ const SubAdminDetailModal = ({
       <div className="relative bg-gradient-to-br from-[#A0E6E1] to-[#C3B4D3] rounded-2xl w-[471px] max-w-xl p-6 shadow-lg max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between border-b border-[#FFFFFF] pb-2">
           <h2 className="text-[18px] font-[600] text-[#212121] mb-2">
-            Pet Details
+            Admin Info
           </h2>
           <button
             onClick={onClose}
@@ -68,7 +69,7 @@ const SubAdminDetailModal = ({
             error={errors.phone}
             touched={touched.phone}
           />
-          <GlobalButton children={"Update"} type="submit" />
+          <GlobalButton loading={updateLoading} children={"Update"} type="submit" />
         </form>
       </div>
     </div>

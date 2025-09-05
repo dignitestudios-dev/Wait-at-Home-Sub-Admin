@@ -4,7 +4,7 @@ import GlobalInputs from "../../../global/GlobalInputs";
 import { IoChevronDown } from "react-icons/io5";
 import GlobalButton from "../../../global/GlobalButton";
 
-const ViewPetDetailModal = ({ isOpen, onClose }) => {
+const ViewPetDetailModal = ({ isOpen, onClose, selectedpet }) => {
   if (!isOpen) return null;
 
   return (
@@ -25,7 +25,7 @@ const ViewPetDetailModal = ({ isOpen, onClose }) => {
         <form className="space-y-3 mt-4">
           <GlobalInputs
             placeholder="Pet’s Name"
-            value=""
+            value={selectedpet?.petName}
             disabled
             type="text"
             name="petName"
@@ -39,6 +39,7 @@ const ViewPetDetailModal = ({ isOpen, onClose }) => {
             <select
               name="petType"
               id="petType"
+              value={selectedpet?.petType}
               disabled
               className="appearance-none bg-gray-100 cursor-not-allowed  w-full rounded-xl px-4 py-3 h-[49px] pr-10 text-[14px]  text-[#616161] border focus:border-[#10C0B6] focus:ring-2 focus:ring-[#10C0B6]"
             >
@@ -57,7 +58,7 @@ const ViewPetDetailModal = ({ isOpen, onClose }) => {
           <GlobalInputs
             disabled
             placeholder="Pet Breed"
-            value=""
+            value={selectedpet?.petBreed}
             type="text"
             name="petBreed"
             id="petBreed"
@@ -69,7 +70,7 @@ const ViewPetDetailModal = ({ isOpen, onClose }) => {
           <GlobalInputs
             disabled
             placeholder="Pet Age"
-            value=""
+            value={selectedpet?.petAge}
             type="text"
             name="petAge"
             id="petAge"
@@ -79,7 +80,8 @@ const ViewPetDetailModal = ({ isOpen, onClose }) => {
           <textarea
             name=""
             disabled
-            className="w-full bg-[#FFFFFF59] cursor-not-allowed  rounded-xl pr-11 px-4 py-3 mb-1 text-[14px] font-[400]  placeholder:text-[#616161] outline-none border transition"
+            value={selectedpet?.symptoms}
+            className="w-full bg-gray-100 cursor-not-allowed opacity-60  rounded-xl pr-11 px-4 py-3 mb-1 text-[14px] font-[400]  placeholder:text-[#616161] outline-none border transition"
             id=""
             placeholder="Symptoms or Reasons for the visit"
             rows={4}

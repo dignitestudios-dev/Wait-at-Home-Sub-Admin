@@ -1,10 +1,50 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-
+import Cookies from "js-cookie";
+import { getFCMToken } from "../firebase/getFcmToken";
+import { ErrorToast } from "../components/global/Toaster";
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const navigate = useNavigate();
+  const [fcmToken, setFcmToken] = useState("");
+  const [userId, setUserId] = useState(() => {
+    return Cookies.get("userId") || null;
+  });
+  const [token, setToken] = useState(() => {
+    return Cookies.get("token") || null;
+  });
+  const [role, setRole] = useState(() => {
+    return Cookies.get("role") || null;
+  });
+  const Auth = (data) => {
+    if (!data?.data) return;
+
+    if (data?.data?.token) {
+      Cookies.set("token", data?.data?.token, { expires: 7 });
+      setToken(data?.data?.token);
+    }
+    if (data?.data?._id) {
+      Cookies.set("userId", data?.data?._id, { expires: 7 });
+      setUserId(data?.data?._id);
+    }
+    if (data?.data?.role) {
+      Cookies.set("role", data?.data?.role, { expires: 7 });
+      setRole(data?.data?.role);
+    }
+  };
+  const getFcm = async () => {
+    try {
+      const fcmTokenResponse = await getFCMToken();
+      setFcmToken(fcmTokenResponse);
+    } catch (err) {
+      console.log("🚀 ~ getFcm ~ err:", err);
+      ErrorToast(err);
+    }
+  };
+  useEffect(() => {
+    getFcm();
+  }, []);
   // Send fcm to backend:
   // const fetchToken = async () => {
   //   const token = await getFCMToken();
@@ -42,15 +82,22 @@ export const AppContextProvider = ({ children }) => {
   //   })
   //   .catch((err) => console.log("failed: ", err));
 
-  const dummyVar = null;
   const handleLogout = () => {
     navigate("/auth/login");
+    Cookies.remove("token");
+    Cookies.remove("role");
+    setToken(null);
+    setRole(null);
   };
   return (
     <AppContext.Provider
       value={{
-        dummyVar,
+        token,
+        Auth,
         handleLogout,
+        fcmToken,
+        role,
+        userId,
       }}
     >
       {children}

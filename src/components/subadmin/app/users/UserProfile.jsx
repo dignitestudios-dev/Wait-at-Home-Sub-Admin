@@ -3,7 +3,13 @@ import { GoArrowLeft } from "react-icons/go";
 import { UserPro } from "../../../../assets/export";
 import { useNavigate } from "react-router";
 
-const UserProfile = () => {
+const UserProfile = ({
+  data,
+  handleCreateChat,
+  loading,
+  handleRestrict,
+  restrictLoader,
+}) => {
   const navigate = useNavigate();
 
   return (
@@ -21,29 +27,47 @@ const UserProfile = () => {
       <div className="bg-[#FFFFFF59] rounded-[32px] h-[104px] w-full mt-20 px-10 py-4 flex items-center justify-between relative">
         <div>
           <div className="absolute -top-[55px] left-10">
-            <img
-              src={UserPro}
-              className="w-[135px] h-[135px] rounded-full object-cover "
-              alt="User Profile"
-            />
+            {data?.profilePicture ? (
+              <img
+                src={data?.profilePicture}
+                className="w-[135px] h-[135px] rounded-full object-cover"
+                alt="User Profile"
+              />
+            ) : (
+              <div className="w-[135px] h-[135px] rounded-full flex items-center justify-center bg-[#10C0B6] text-white text-[36px] font-bold">
+                {data?.name?.substring(0, 2)?.toUpperCase()}
+              </div>
+            )}
           </div>
 
           <div className="ml-[160px]">
             <h2 className="text-[20px] font-semibold text-[#333]">
-              Leo Denzin
+              {data?.name}
             </h2>
-            <p className="text-[14px] text-[#666]">leodenzin@gmail.com</p>
+            <p className="text-[14px] text-[#666]">{data?.email}</p>
           </div>
         </div>
         <div className="flex gap-3">
-          <button className="h-[43px] w-[125px] bg-[#EE3131] rounded-[12px] text-[14px] font-[600] text-white ">
-            Restrict
-          </button>
+          {data?.isRestrictedByAdmin ? (
+            <button
+              onClick={() => handleRestrict(data?.signUpRecord)}
+              className="h-[43px] w-[125px] bg-[#EE3131] rounded-[12px] text-[14px] font-[600] text-white "
+            >
+              {restrictLoader ? "UnRestricting..." : "UnRestrict"}
+            </button>
+          ) : (
+            <button
+              onClick={() => handleRestrict(data?.signUpRecord)}
+              className="h-[43px] w-[125px] bg-[#EE3131] rounded-[12px] text-[14px] font-[600] text-white "
+            >
+              {restrictLoader ? "Restricting..." : "Restrict"}
+            </button>
+          )}
           <button
-            onClick={() => navigate("/app/chat")}
+           onClick={() => handleCreateChat(data?.signUpRecord)}
             className="h-[43px] w-[125px] bg-gradient-to-tl from-[#684D7B] to-[#10C0B6] rounded-[12px] text-[14px] font-[600] text-white "
           >
-            Chat
+            {loading ? "Chat started" : "Chat"}
           </button>
         </div>
       </div>

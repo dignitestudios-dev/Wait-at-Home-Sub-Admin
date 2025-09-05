@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { UserPro } from "../../../../assets/export";
 import { FaTrash } from "react-icons/fa";
 
-const SubAdminProfile = ({deleteModal}) => {
+const SubAdminProfile = ({ deleteModal, user }) => {
   const navigate = useNavigate();
 
   return (
@@ -16,24 +16,24 @@ const SubAdminProfile = ({deleteModal}) => {
         >
           <GoArrowLeft size={20} />
         </div>
-        <h2 className="text-[#5E2E86] text-[24px] font-[600]">Sub Admin Profile</h2>
+        <h2 className="text-[#5E2E86] text-[24px] font-[600]">
+          Sub Admin Profile
+        </h2>
       </div>
 
       <div className="bg-[#FFFFFF59] rounded-[32px] h-[104px] w-full mt-20 px-10 py-4 flex items-center justify-between relative">
         <div>
           <div className="absolute -top-[55px] left-10">
-            <img
-              src={UserPro}
-              className="w-[135px] h-[135px] rounded-full object-cover "
-              alt="User Profile"
-            />
+            <div className="w-[135px] h-[135px]  rounded-full flex items-center justify-center text-[34px] font-bold bg-[#10C0B6] text-white">
+              {user.name?.substring(0, 2)?.toUpperCase() || "N/A"}
+            </div>
           </div>
 
           <div className="ml-[160px]">
             <h2 className="text-[20px] font-semibold text-[#333]">
-              Leo Denzin
+              {user?.name || "N/A"}
             </h2>
-            <p className="text-[14px] text-[#666]">leodenzin@gmail.com</p>
+            <p className="text-[14px] text-[#666]">{user?.email}</p>
           </div>
         </div>
         <div className="flex gap-3">

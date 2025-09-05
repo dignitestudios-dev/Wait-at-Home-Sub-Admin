@@ -28,13 +28,18 @@ const createBarGradient = (ctx, area) => {
   return gradient;
 };
 
-const BarGrap = () => {
+const BarGrap = ({ graphData }) => {
+  
+
+  const totalAppointments = graphData?.totalAppointments || 0;
+  const cancelledAppointments = graphData?.cancelledAppointments || 0;
+
   const data = {
-    labels: ["Appointments", "Cancellation"], // Each label maps to one dataset
+    labels: ["Bookings", "Cancellations"],
     datasets: [
       {
-        label: "Appointments",
-        data: [120, 0], // Appointments value on first bar
+        label: "Bookings",
+        data: [totalAppointments, 0], 
         backgroundColor: (context) => {
           const { ctx, chartArea } = context.chart;
           if (!chartArea) return null;
@@ -48,8 +53,8 @@ const BarGrap = () => {
         borderSkipped: "left",
       },
       {
-        label: "Cancellation",
-        data: [0, 80],
+        label: "Cancellations",
+        data: [0, cancelledAppointments], // cancelledAppointments second bar
         backgroundColor: "#EE3131",
         barThickness: 40,
         borderRadius: {
@@ -106,7 +111,7 @@ const BarGrap = () => {
     <div className="bg-[#e9f2f4] mt-3 backdrop-blur-[50px] p-5 h-[350px] relative w-full rounded-[16px] ">
       <div className="flex justify-between absolute top-3 right-0 left-0 p-4">
         <h3 className="font-[700] text-[15.16px] text-[#8A92A6]  ">Bookings</h3>
-        <div className="flex gap-2 cursor-pointer  items-center bg-transparent text-[#8A92A6] outline-none text-[12.77px] font-[400]">
+        <div className="flex gap-2 cursor-pointer items-center bg-transparent text-[#8A92A6] outline-none text-[12.77px] font-[400]">
           This Week
           <IoIosArrowDown size={18} color="black" />
         </div>

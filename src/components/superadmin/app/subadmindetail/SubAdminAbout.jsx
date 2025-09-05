@@ -4,29 +4,32 @@ import { MdOutlineEmail } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
 import { RiEdit2Line } from "react-icons/ri";
 import { EditIcon } from "../../../../assets/export";
+import { phoneFormater } from "../../../../lib/helpers";
 
-const aboutData = [
-  {
-    label: "Name",
-    value: "Leo Denzin",
-    icon: <CiUser size={20} color="white" />,
-  },
-  {
-    label: "Email",
-    value: "leodenzin@gmail.com",
-    icon: <MdOutlineEmail size={20} color="white" />,
-  },
-  {
-    label: "Phone",
-    value: "+1 123 456 7899",
-    icon: <FiPhone size={20} color="white" />,
-  },
-];
+const SubAdminAbout = ({ handleInfoEdit, user }) => {
+  const aboutData = [
+    {
+      label: "Name",
+      value: user?.name || "N/A",
+      icon: <CiUser size={20} color="white" />,
+    },
+    {
+      label: "Email",
+      value: user?.email || "N/A",
+      icon: <MdOutlineEmail size={20} color="white" />,
+    },
+    {
+      label: "Phone",
+      value:user?.phone 
+  ? `+1${phoneFormater(user.phone)}`
+  : "N/A"
+,
+      icon: <FiPhone size={20} color="white" />,
+    },
+  ];
 
-const SubAdminAbout = ({ handleInfoEdit }) => {
   return (
     <div className="bg-[#FFFFFF59] rounded-[32px] p-4 space-y-4">
-
       <div className="flex justify-between items-center">
         <h2 className="text-[18px] font-[600]">About</h2>
         <div onClick={handleInfoEdit} className="cursor-pointer">

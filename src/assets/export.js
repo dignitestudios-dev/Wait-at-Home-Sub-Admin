@@ -18,9 +18,11 @@ import ChatAccept from "./chataccept.png";
 import ChatClose from "./chatclose.png";
 import Logout from "./logout.png";
 import EditIcon from "./edit.png";
+import AlertImg from "./alertImg.png";
 export {
   Logo,
   EditIcon,
+  AlertImg,
   IconCat,
   IconDog,
   NoInternetImage,

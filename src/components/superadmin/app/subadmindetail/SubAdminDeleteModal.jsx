@@ -1,7 +1,12 @@
 import React from "react";
 import { GoAlert } from "react-icons/go";
 
-const SubAdminDeleteModal = ({ isOpen, onClose }) => {
+const SubAdminDeleteModal = ({
+  isOpen,
+  onClose,
+  handleDelete,
+  deleteLoading,
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -20,8 +25,11 @@ const SubAdminDeleteModal = ({ isOpen, onClose }) => {
             </p>
           </div>
           <div className="flex gap-3">
-            <button className="h-[43px] w-[204px] bg-[#EE3131] rounded-[12px] text-[14px] font-[600] text-white ">
-              Delete Now
+            <button
+              onClick={handleDelete}
+              className="h-[43px] w-[204px] bg-[#EE3131] rounded-[12px] text-[14px] font-[600] text-white "
+            >
+             {deleteLoading ? "Deleting..." : "Delete"}
             </button>
             <button
               onClick={onClose}

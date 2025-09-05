@@ -1,20 +1,16 @@
 import React, { useState } from "react";
-import { useLogin } from "../../hooks/api/Post";
-import { processLogin } from "../../lib/utils";
 import { useFormik } from "formik";
-import { loginValues } from "../../init/authentication/dummyLoginValues";
-import { signInSchema } from "../../schema/authentication/dummyLoginSchema";
 import { NavLink, useNavigate } from "react-router";
 import { Lock, Logo } from "../../assets/export";
 import GlobalInputs from "../../components/global/GlobalInputs";
 import GlobalButton from "../../components/global/GlobalButton";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import * as Yup from "yup";
+import { ErrorToast, SuccessToast } from "../../components/global/Toaster";
+import axios from "../../axios";
 const ForgotPassword = () => {
   const navigate = useNavigate();
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-  const { loading, postData } = useLogin();
+  const [loading, setLoading] = useState(false);
 
   const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
     useFormik({
@@ -31,7 +27,19 @@ const ForgotPassword = () => {
           email: values?.email,
           password: values?.password,
         };
-        navigate("/auth/otp-forgot");
+        setLoading(true);
+        try {
+          const response = await axios.post("/auth/forgot-password", data);
+          if (response?.status === 200) {
+            SuccessToast(response?.data?.message);
+            navigate("/auth/otp-forgot");
+            sessionStorage.setItem("email", values?.email);
+          }
+        } catch (error) {
+          ErrorToast(error?.response?.data?.message);
+        } finally {
+          setLoading(false);
+        }
       },
     });
 
@@ -77,7 +85,7 @@ const ForgotPassword = () => {
         </div>
 
         <div className="w-[426px]">
-          <GlobalButton children={"Get OTP"} type="submit" />
+          <GlobalButton loading={loading} children={"Get OTP"} type="submit" />
         </div>
       </form>
     </div>

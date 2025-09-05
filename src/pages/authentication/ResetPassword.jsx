@@ -7,7 +7,8 @@ import { ResetSchema } from "../../schema/authentication/ResetSchema";
 import { LockReset } from "../../assets/export";
 import GlobalInputs from "../../components/global/GlobalInputs";
 import GlobalButton from "../../components/global/GlobalButton";
-
+import { ErrorToast, SuccessToast } from "../../components/global/Toaster";
+import axios from "../../axios";
 const ResetPassword = () => {
   const navigate = useNavigate();
 
@@ -22,13 +23,23 @@ const ResetPassword = () => {
       validateOnBlur: true,
       onSubmit: async (values, action) => {
         const data = {
-          email: values?.password,
-          password: values?.Cpassword,
+          newPassword: values?.Cpassword,
         };
-        setIsUpdate(true);
-        setTimeout(() => {
-          navigate("/auth/login");
-        }, 2000);
+        setLoading(true);
+        try {
+          const response = await axios.post("/auth/reset-password", data);
+          if (response?.status === 200) {
+            SuccessToast(response?.data?.message);
+            setIsUpdate(true);
+            setTimeout(() => {
+              navigate("/auth/login");
+            }, 2000);
+          }
+        } catch (error) {
+          ErrorToast(error?.response?.data?.message);
+        } finally {
+          setLoading(false);
+        }
       },
     });
 
@@ -38,9 +49,7 @@ const ResetPassword = () => {
         <PasswordUpdated />
       ) : (
         <div className="rounded-[30px] h-[872px] relative flex justify-center py-4 items-center flex-col bg-[#FFFFFF66]/30 w-[599px]">
-          <div
-            className=""
-          >
+          <div className="">
             <div className="flex justify-center mb-6">
               <img
                 src={LockReset}
@@ -90,7 +99,11 @@ const ResetPassword = () => {
                 />
               </div>
 
-              <GlobalButton type="submit" children={"Set Password"} />
+              <GlobalButton
+                loading={loading}
+                type="submit"
+                children={"Set Password"}
+              />
             </form>
           </div>
         </div>

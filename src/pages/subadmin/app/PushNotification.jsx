@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import NotificationForm from "../../../components/subadmin/app/pushnotification/NotificationForm";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "../../../axios";
+import { ErrorToast, SuccessToast } from "../../../components/global/Toaster";
 
 const PushNotification = () => {
+  const [loading, setLoading] = useState(false);
   const validateSchema = Yup.object({
     title: Yup.string()
       .required("Title is required")
@@ -18,18 +21,29 @@ const PushNotification = () => {
       validationSchema: validateSchema,
       validateOnChange: true,
       validateOnBlur: true,
-      onSubmit: async (values) => {
+      onSubmit: async (values, { resetForm }) => {
         const data = {
           title: values?.title,
-          description: values?.description,
+          message: values?.description,
         };
-
-        // postData("/admin/login", false, null, data, processLogin);
+        setLoading(true);
+        try {
+          const response = await axios.post("/admin/push-notification", data);
+          if (response?.status === 200) {
+            SuccessToast(response?.data?.message);
+            resetForm();
+          }
+        } catch (error) {
+          ErrorToast(error?.response?.data?.message);
+        } finally {
+          setLoading(false);
+        }
       },
     });
   return (
     <div>
       <NotificationForm
+        loading={loading}
         values={values}
         handleChange={handleChange}
         handleBlur={handleBlur}

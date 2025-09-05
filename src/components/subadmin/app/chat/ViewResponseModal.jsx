@@ -9,6 +9,7 @@ const ViewResponseModal = ({
   handleChange,
   cancelReasonDiscription,
   errorReasonDiscription,
+  selectedChat,
 }) => {
   if (!isOpen) return null;
 
@@ -27,11 +28,16 @@ const ViewResponseModal = ({
           </button>
         </div>
         <div className="mt-4">
-          <GlobalInputs placeholder={"Info here"} disabled />
+          <GlobalInputs
+            value={selectedChat?.subject}
+            placeholder={"Info here"}
+            disabled
+          />
 
           <textarea
             placeholder="Description here"
             disabled
+            value={selectedChat?.description}
             className={`bg-gray-100 cursor-not-allowed opacity-60 w-full mt-7 rounded-[20px] h-[113px] px-4 py-4 border  `}
           ></textarea>
         </div>

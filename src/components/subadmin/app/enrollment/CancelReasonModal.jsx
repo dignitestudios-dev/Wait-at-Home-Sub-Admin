@@ -1,5 +1,6 @@
 import React from "react";
 import { RxCross2 } from "react-icons/rx";
+import GlobalButton from "../../../global/GlobalButton";
 
 const CancelReasonModal = ({
   isOpen,
@@ -8,6 +9,7 @@ const CancelReasonModal = ({
   handleChange,
   cancelReasonDiscription,
   errorReasonDiscription,
+  cancelloading,
 }) => {
   if (!isOpen) return null;
 
@@ -41,12 +43,12 @@ const CancelReasonModal = ({
         )}
         <div className="flex flex-col justify-center items-center space-y-3 mt-10">
           <div className="text-[18px] font-[600] text-[#00000080]">Skip</div>
-          <button
+          <GlobalButton
+            type="submit"
+            children={"Submit"}
+            loading={cancelloading}
             onClick={handleClick}
-            className="w-full bg-[#00AAAD] hover:bg-[#00908b] text-white text-[14px] font-[600] py-3 rounded-[12px] transition duration-200"
-          >
-            Submit
-          </button>
+          />
         </div>
       </div>
     </div>
