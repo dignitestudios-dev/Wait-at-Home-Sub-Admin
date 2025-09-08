@@ -83,7 +83,7 @@ const AddSubAdmin = ({
             touched={touched.password}
             max={50}
           />
-          <GlobalButton loading={loading} type="submit" children={"Update"} />
+          <GlobalButton loading={loading} type="submit" children={"Add"} />
         </form>
       </div>
     </div>

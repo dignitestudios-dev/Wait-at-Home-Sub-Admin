@@ -67,7 +67,6 @@ const ChatMessages = ({
           </div>
         </div>
 
-        {/* Input */}
         {selectedChat?.chatStatus === "finished" ? (
           <div className="flex justify-center relative bottom-20 right-0 left-0 gap-2 mx-auto my-2 h-[40px] items-center w-[187px] px-4 py-2 bg-[#FFFFFF59] text-[#000000] font-[500] text-[14px] rounded-full">
             <LiaCheckDoubleSolid size={22} /> Chat Finished

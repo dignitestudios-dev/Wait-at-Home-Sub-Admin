@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { formatTime } from "../../../../lib/helpers";
 
 const MessageList = ({ messages, userId }) => {
   const bottomRef = useRef(null);
@@ -23,11 +24,18 @@ const MessageList = ({ messages, userId }) => {
                 : "bg-[#FFFFFF80] text-black"
             }`}
           >
-            {msg.content}
+            {msg.content}{" "}
+            <span
+              className={`block text-[10px] mt-1 text-right ${
+                msg.sender === userId ? "text-gray-200" : "text-gray-600"
+              }`}
+            >
+              {formatTime(msg?.createdAt)}
+            </span>
           </div>
         </div>
       ))}
-          <div ref={bottomRef} />
+      <div ref={bottomRef} />
     </div>
   );
 };

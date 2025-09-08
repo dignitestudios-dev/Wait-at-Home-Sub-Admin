@@ -23,13 +23,13 @@ const StartChatModal = ({ isOpen, onClose, handleStartNow }) => {
         <div className="flex gap-3 items-center mt-5">
           <button
             onClick={handleStartNow}
-            className="h-[48px] text-white w-[203px]  bg-[#00AAAD] rounded-[12px] "
+            className="h-[48px] text-white w-[203px]  font-[500] bg-[#00AAAD] rounded-[12px] "
           >
             Start now
           </button>
           <button
             onClick={onClose}
-            className="h-[48px] text-[#00AAAD] w-[203px]  bg-white rounded-[12px] "
+            className="h-[48px] text-[#00AAAD] w-[203px]   font-[500] bg-white rounded-[12px] "
           >
             Not now
           </button>

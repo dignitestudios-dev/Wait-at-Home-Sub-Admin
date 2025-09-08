@@ -5,11 +5,11 @@ const PetProfile = ({ data }) => {
   return (
     <div>
       {data?.pets && data.pets.length > 0 ? (
-        <div className="flex flex-wrap gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {data.pets.map((pet, idx) => (
             <div
               key={idx}
-              className="bg-[#c7d9df] backdrop-blur rounded-[20px] h-[80px] px-4 py-3 flex items-center justify-center gap-4 shadow-sm w-full max-w-xs"
+              className="bg-[#c7d9df] backdrop-blur rounded-[20px] h-[80px] px-4 py-3 flex items-center gap-4 shadow-sm"
             >
               <div className="w-[48px] h-[48px] rounded-full bg-gradient-to-b from-[#10C0B6] to-[#684D7B] flex items-center justify-center">
                 <img

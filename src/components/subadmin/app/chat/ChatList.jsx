@@ -14,7 +14,7 @@ const ChatList = ({ chats = [], setSelectedChat }) => {
     const aTime = a?.last_msg?.createdAt?.seconds || a?.createdAt?.seconds || 0;
     const bTime = b?.last_msg?.createdAt?.seconds || b?.createdAt?.seconds || 0;
 
-    return bTime - aTime; 
+    return bTime - aTime;
   });
 
   console.log(chats);

@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { loginValues } from "../../init/authentication/dummyLoginValues";
 import { signInSchema } from "../../schema/authentication/dummyLoginSchema";
 import { NavLink, useNavigate } from "react-router";
-import { Logo } from "../../assets/export";
+import { ActiveCheck, InactiveCheck, Logo } from "../../assets/export";
 import GlobalInputs from "../../components/global/GlobalInputs";
 import GlobalButton from "../../components/global/GlobalButton";
 import axios from "../../axios";
@@ -13,7 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { Auth, fcmToken } = useContext(AppContext);
-  console.log(fcmToken, "fcmToken==>");
+  const [rememberMe, setRememberMe] = useState(false);
   const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
     useFormik({
       initialValues: loginValues,
@@ -93,7 +93,12 @@ const Login = () => {
         </div>
         <div className="flex justify-between items-center text-sm">
           <label className="flex items-center gap-2 text-[#565656]">
-            <input type="checkbox" className="accent-[#00AAAD]" />
+            <img
+              onClick={() => setRememberMe((prev) => !prev)}
+              className="w-[18px] cursor-pointer h-[18px] "
+              src={rememberMe ? ActiveCheck : InactiveCheck}
+              alt=""
+            />
             Remember me
           </label>
           <NavLink
