@@ -1,6 +1,7 @@
 import React from "react";
 import Pagination from "../../../global/Pagination";
 import { UserTableSkeleton } from "../../../global/Skeleton";
+import { formatStatus } from "../../../../lib/helpers";
 
 const EnrollmentTable = ({
   handleViewCancel,
@@ -76,21 +77,22 @@ const EnrollmentTable = ({
                           })
                         : "N/A"}
                     </td>
-                    <td className="py-4 px-4 capitalize text-[12px] font-[500]">
-                      {user.AppointmentStatus === "cancelled" ? (
-                        <button
-                         className="capitalize"
-                          onClick={() => {
-                            setSelectedCancel(user.cancelReason);
-                            handleViewCancel(user);
-                          }}
-                        >
-                          {user.AppointmentStatus}
-                        </button>
-                      ) : (
-                        user.AppointmentStatus
-                      )}
-                    </td>
+                   <td className="py-4 px-4 text-[12px] font-[500]">
+  {user.AppointmentStatus === "cancelled" ? (
+    <button
+      className="capitalize"
+      onClick={() => {
+        setSelectedCancel(user.cancelReason);
+        handleViewCancel(user);
+      }}
+    >
+      {formatStatus(user.AppointmentStatus)}
+    </button>
+  ) : (
+    formatStatus(user.AppointmentStatus)
+  )}
+</td>
+
 
                     <td className="py-4 px-4  text-[12px] font-[500] ">
                       <button

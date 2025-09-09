@@ -31,3 +31,12 @@ export const formatTime = (timestamp) => {
     hour12: true,
   });
 };
+export const formatStatus = (status) => {
+  if (!status) return "";
+
+  return status
+    .toLowerCase()
+    .split(/[_\s]+/) // underscore ya space pe split
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};

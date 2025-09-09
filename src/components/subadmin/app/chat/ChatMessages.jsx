@@ -42,7 +42,7 @@ const ChatMessages = ({
       <PendingChatView
         selectedChat={selectedChat}
         onStartChat={handleStartChat}
-        setViewResponseModal={setViewResponseModal}
+        onViewResponse={setViewResponseModal}
       />
     );
   }

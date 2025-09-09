@@ -143,11 +143,16 @@ const Chat = () => {
         </div>
 
         <ChatSidebarTabs
+          filteredActiveChats={filteredActiveChats}
+          filteredPendingChats={filteredPendingChats}
           chatSiderBarTab={chatSiderBarTab}
           setChatSideBarTab={setChatSideBarTab}
         />
         {chatSiderBarTab === "Chat" && (
-          <ChatList chats={filteredActiveChats} setSelectedChat={setSelectedChat} />
+          <ChatList
+            chats={filteredActiveChats}
+            setSelectedChat={setSelectedChat}
+          />
         )}
         {chatSiderBarTab === "Requests" && (
           <RequestsList

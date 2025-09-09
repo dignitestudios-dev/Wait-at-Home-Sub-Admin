@@ -17,7 +17,6 @@ const ChatList = ({ chats = [], setSelectedChat }) => {
     return bTime - aTime;
   });
 
-  console.log(chats);
   return (
     <div className="custom-scrollbar overflow-y-auto max-h-[70vh] flex-1">
       {sortedChats?.map((chat) => (

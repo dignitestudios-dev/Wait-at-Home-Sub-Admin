@@ -1,6 +1,10 @@
 import React from "react";
 
-const ChatSidebarTabs = ({ setChatSideBarTab, chatSiderBarTab }) => {
+const ChatSidebarTabs = ({
+  setChatSideBarTab,
+  chatSiderBarTab,
+  filteredPendingChats,
+}) => {
   return (
     <div className="flex justify-around border-b">
       <button
@@ -19,6 +23,11 @@ const ChatSidebarTabs = ({ setChatSideBarTab, chatSiderBarTab }) => {
           rounded-tr-[15px]`}
       >
         Requests
+        {filteredPendingChats?.length > 0 && (
+          <span className="ml-2 px-2 py-0.5 bg-white text-[#00AAAD] rounded-full text-xs font-bold">
+            {filteredPendingChats.length}
+          </span>
+        )}
       </button>
     </div>
   );
