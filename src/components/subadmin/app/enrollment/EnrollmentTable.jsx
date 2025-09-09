@@ -76,9 +76,10 @@ const EnrollmentTable = ({
                           })
                         : "N/A"}
                     </td>
-                    <td className="py-4 px-4 text-[12px] font-[500]">
+                    <td className="py-4 px-4 capitalize text-[12px] font-[500]">
                       {user.AppointmentStatus === "cancelled" ? (
                         <button
+                         className="capitalize"
                           onClick={() => {
                             setSelectedCancel(user.cancelReason);
                             handleViewCancel(user);
