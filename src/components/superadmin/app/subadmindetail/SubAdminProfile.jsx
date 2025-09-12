@@ -4,7 +4,12 @@ import { useNavigate } from "react-router";
 import { UserPro } from "../../../../assets/export";
 import { FaTrash } from "react-icons/fa";
 
-const SubAdminProfile = ({ deleteModal, user }) => {
+const SubAdminProfile = ({
+  deleteModal,
+  user,
+  handleRestrict,
+  restrictLoader,
+}) => {
   const navigate = useNavigate();
 
   return (
@@ -37,9 +42,13 @@ const SubAdminProfile = ({ deleteModal, user }) => {
           </div>
         </div>
         <div className="flex gap-3">
-          <button className="h-[43px] w-[125px] bg-[#EE3131] rounded-[12px] text-[14px] font-[600] text-white ">
-            Restrict
+          <button
+            onClick={() => handleRestrict(user?._id)}
+            className="h-[43px] w-[125px] bg-[#EE3131] rounded-[12px] text-[14px] font-[600] text-white "
+          >
+            {restrictLoader ? "Restricting..." : "Restrict"}
           </button>
+
           <button
             onClick={() => deleteModal()}
             className="h-[44px] w-[44px] flex justify-center items-center  border border-[#EE3131] rounded-full text-[14px] font-[600] text-white "

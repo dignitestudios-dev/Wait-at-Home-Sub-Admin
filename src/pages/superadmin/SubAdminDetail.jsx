@@ -19,6 +19,7 @@ const SubAdminDetail = () => {
   const [aboutData, setAboutData] = useState("");
   const [deleteId, setDeleteId] = useState("");
   const [updateLoading, setUpdateLoading] = useState(false);
+  const [restrictLoader, setRestrictLoader] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [update, setUpdate] = useState(false);
   const { id } = useParams();
@@ -78,6 +79,23 @@ const SubAdminDetail = () => {
       setDeleteLoading(false);
     }
   };
+  const handleRestrict = async (id) => {
+    const payload = {
+      userId: id,
+    };
+    setRestrictLoader(true);
+    try {
+      const response = await axios.post("/admin/restrict-user", payload);
+      if (response?.status === 200) {
+        SuccessToast(response?.data?.message);
+        setUpdate((prev) => !prev);
+      }
+    } catch (error) {
+      ErrorToast(error?.response?.data?.message);
+    } finally {
+      setRestrictLoader(false);
+    }
+  };
 
   return (
     <div>
@@ -91,6 +109,8 @@ const SubAdminDetail = () => {
               setDeleteId(data?._id);
               setDeleteModal(true);
             }}
+            handleRestrict={handleRestrict}
+            restrictLoader={restrictLoader}
           />
           <div className="w-full mt-3">
             <SubAdminAbout
