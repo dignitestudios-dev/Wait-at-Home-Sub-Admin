@@ -21,11 +21,11 @@ const ChatList = ({ chats = [], setSelectedChat }) => {
     <div className="custom-scrollbar overflow-y-auto max-h-[70vh] flex-1">
       {sortedChats?.map((chat) => (
         <div
-          key={chat.id}
+          key={chat?.id}
           onClick={() => setSelectedChat(chat)}
           className="flex items-center px-4 py-3 cursor-pointer border-b hover:bg-gray-100"
         >
-          {chat.image_url ? (
+          {chat?.image_url ? (
             <img
               src={chat.image_url || UserPro}
               alt={chat.username}

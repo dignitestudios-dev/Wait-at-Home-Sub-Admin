@@ -3,6 +3,7 @@ import { db, messaging } from "./firebase";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   onSnapshot,
   orderBy,
@@ -54,13 +55,10 @@ export const sendMessage = async (chatId, content, sender) => {
 export const finishChat = async (chatId) => {
   try {
     const chatRef = doc(db, "Chat", chatId);
-    await updateDoc(chatRef, {
-      chatStatus: "finished",
-      finishedAt: new Date(), // optional
-    });
-    console.log("Chat marked as finished ✅");
+    await deleteDoc(chatRef);
+    console.log("Chat deleted from Firestore ✅");
   } catch (error) {
-    console.error("Error finishing chat:", error);
+    console.error("Error deleting chat:", error);
   }
 };
 export const restartChat = async (chatId) => {

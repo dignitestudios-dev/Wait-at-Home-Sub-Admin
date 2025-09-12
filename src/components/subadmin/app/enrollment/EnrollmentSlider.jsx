@@ -20,14 +20,16 @@ const EnrollmentSlider = ({
 
   // Currently serving filter (only today)
   const currentlyServing = data?.All?.filter(
-    (u) => u.currentlyServing === true && u.AppointmentDate?.split("T")[0] === today
+    (u) =>
+      u.currentlyServing === true && u.AppointmentDate?.split("T")[0] === today
   );
 
-const pendingUsers = data?.All?.filter(
-  (u) =>
-    u.AppointmentStatus === "pending" &&
-    new Date(u.AppointmentDate).toISOString().split("T")[0] === today
-);
+  const pendingUsers = data?.All?.filter(
+    (u) =>
+      u.AppointmentStatus === "pending" &&
+      new Date(u.AppointmentDate).toISOString().split("T")[0] === today
+  );
+  console.log(data?.CurrentlyServing);
   return (
     <div className="bg-[#FFFFFF59] p-6 rounded-3xl shadow-md w-full overflow-hidden mt-4">
       <div className="flex items-center gap-5 overflow-x-auto no-scrollbar">
@@ -50,7 +52,7 @@ const pendingUsers = data?.All?.filter(
         ))}
 
         {/* CENTER: currently serving */}
-        {currentlyServing?.map((user, index) => (
+        {data?.CurrentlyServing?.map((user, index) => (
           <div
             key={index}
             className="flex flex-col h-[154px] items-center justify-center text-center bg-[#FFFFFF59] w-[104px] px-4 py-4 rounded-[12px] shadow-sm"
