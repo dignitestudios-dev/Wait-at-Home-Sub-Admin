@@ -10,12 +10,50 @@ const ChatList = ({ chats = [], setSelectedChat }) => {
       </div>
     );
   }
+  console.log(chats,"chats")
   const sortedChats = [...chats].sort((a, b) => {
-    const aTime = a?.last_msg?.createdAt?.seconds || a?.createdAt?.seconds || 0;
-    const bTime = b?.last_msg?.createdAt?.seconds || b?.createdAt?.seconds || 0;
+  const getTime = (chat) => {
+    // 1. last_msg ka time agar exist karta hai
+    if (chat?.last_msg?.createdAt?.seconds) {
+      return chat.last_msg.createdAt.seconds;
+    }
 
-    return bTime - aTime;
-  });
+    // 2. updated_at ek object hai (userId keys ke sath), usme se sabse bada seconds value lo
+    if (chat?.updated_at) {
+      const values = Object.values(chat.updated_at);
+      if (values.length > 0) {
+        return Math.max(...values.map((v) => v.seconds));
+      }
+    }
+
+    // 3. created_at ka time
+    if (chat?.created_at?.seconds) {
+      return chat.created_at.seconds;
+    }
+
+    // 4. agar kuch bhi na mila
+    return 0;
+  };
+
+  return getTime(b) - getTime(a);
+});
+
+const getChatTime = (chat) => {
+  if (chat?.last_msg?.createdAt?.seconds) return chat.last_msg.createdAt;
+  if (chat?.startedAt?.seconds) return chat.startedAt;
+  
+  if (chat?.updated_at) {
+    const values = Object.values(chat.updated_at);
+    if (values.length > 0) {
+      const maxTime = values.reduce((max, v) => v.seconds > max.seconds ? v : max, values[0]);
+      return maxTime;
+    }
+  }
+
+  if (chat?.created_at?.seconds) return chat.created_at;
+
+  return null;
+};
 
   return (
     <div className="custom-scrollbar overflow-y-auto max-h-[70vh] flex-1">
@@ -43,7 +81,7 @@ const ChatList = ({ chats = [], setSelectedChat }) => {
                 {chat.username || "Unknown"}
               </h4>
               <span className="text-[12px] font-[400] text-[#1B1B1B]">
-                {chat?.startedAt?.seconds ? formatTime(chat.startedAt) : ""}
+               {getChatTime(chat) ? formatTime(getChatTime(chat)) : ""}
               </span>
             </div>
             <div className="flex justify-between items-center">

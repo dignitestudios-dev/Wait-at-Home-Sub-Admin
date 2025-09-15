@@ -10,6 +10,10 @@ import { UserDetailsSkeleton } from "../../../components/global/Skeleton";
 import Cookies from "js-cookie";
 import axios from "../../../axios";
 import { ErrorToast, SuccessToast } from "../../../components/global/Toaster";
+import {
+  createChatIfNotExists,
+  getExistingChat,
+} from "../../../firebase/messages";
 const UserDetails = () => {
   const navigate = useNavigate();
   const [active, setActive] = useState("PetProfile");
@@ -24,18 +28,25 @@ const UserDetails = () => {
     update
   );
   const handleCreateChat = async (id) => {
-    const payload = {
-      subject: null,
-      description: null,
-      userId: id,
-    };
     setLoading(true);
     try {
+      const existingChat = await getExistingChat(id);
+
+      if (existingChat) {
+        navigate("/app/chat", { state: { newChat: existingChat } });
+        return;
+      }
+
+      const payload = { subject: null, description: null, userId: id };
       const response = await axios.post("/user/create-chat-room", payload);
+
       if (response?.status === 200) {
         SuccessToast(response?.data?.message);
-        Cookies.set("chatRoomId", response?.data?.data?.chatRoomId);
-        navigate("/app/chat");
+        const newChat = response?.data?.data;
+
+        await createChatIfNotExists(newChat);
+        Cookies.set("chatRoomId", newChat?.chatRoomId);
+        navigate("/app/chat", { state: { newChat } });
       }
     } catch (error) {
       ErrorToast(error?.response?.data?.message);

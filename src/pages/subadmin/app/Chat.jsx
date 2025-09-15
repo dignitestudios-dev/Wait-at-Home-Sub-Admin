@@ -15,6 +15,7 @@ import { ErrorToast } from "../../../components/global/Toaster";
 import {
   collection,
   doc,
+  getDoc,
   onSnapshot,
   orderBy,
   query,
@@ -23,7 +24,9 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
 import { finishChat, restartChat } from "../../../firebase/messages";
+import { useLocation } from "react-router";
 const Chat = () => {
+  const location = useLocation();
   const [chatSiderBarTab, setChatSideBarTab] = useState("Chat");
   const [startChatModal, setStartChatModal] = useState(false);
   const [viewResponseModal, setViewResponseModal] = useState(false);
@@ -36,6 +39,24 @@ const Chat = () => {
   const [activeChats, setActiveChats] = useState([]);
   const [endNowLoader, setEndNowLoader] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+  const fetchChat = async () => {
+    if (location.state?.newChat?.chatRoomId) {
+      try {
+        const ref = doc(db, "Chat", location.state.newChat.chatRoomId);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+          setSelectedChat({ id: snap.id, ...snap.data() });
+        }
+      } catch (err) {
+        console.error("Error fetching chat:", err);
+      }
+    }
+  };
+
+  fetchChat();
+}, [location.state]);
   useEffect(() => {
     const q = query(
       collection(db, "Chat"),

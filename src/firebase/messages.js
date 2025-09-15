@@ -5,11 +5,14 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDocs,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
   updateDoc,
+  where,
 } from "firebase/firestore";
 
 export const onMessageListener = () =>
@@ -18,6 +21,39 @@ export const onMessageListener = () =>
       resolve(payload);
     });
   });
+
+export const createChatIfNotExists = async (chat) => {
+  if (!chat?.chatRoomId) return;
+
+  const chatRef = doc(db, "Chat", chat.chatRoomId);
+
+  await setDoc(
+    chatRef,
+    {
+      ...chat,
+      chatStatus: chat?.chatStatus || "initialized",
+      createdAt: chat?.createdAt || serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
+};
+
+export const getExistingChat = async (userId) => {
+  const q = query(
+    collection(db, "Chat"),
+    where("members", "array-contains", userId) // tumhare backend me members array aa rahi hogi
+  );
+
+  const snapshot = await getDocs(q);
+
+  let existingChat = null;
+  snapshot.forEach((doc) => {
+    existingChat = { id: doc.id, ...doc.data() };
+  });
+
+  return existingChat;
+};
 export const listenToMessages = (chatId, callback) => {
   if (!chatId) return () => {};
   const q = query(
