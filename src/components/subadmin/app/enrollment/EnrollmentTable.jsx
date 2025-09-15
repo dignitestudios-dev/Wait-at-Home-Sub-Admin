@@ -100,7 +100,7 @@ const EnrollmentTable = ({
                           : "N/A"}
                       </td>
                         <td className="py-4 px-4 text-[12px] font-[500] max-w-[150px] overflow-hidden whitespace-nowrap truncate">
-                        {user?.actionBy || 'Null'}
+                        {user?.actionBy || 'N/A'}
                       </td>
                       <td className="py-4 px-4 text-[12px] font-[500]">
                         {user?.AppointmentStatus === "cancelled" ? (

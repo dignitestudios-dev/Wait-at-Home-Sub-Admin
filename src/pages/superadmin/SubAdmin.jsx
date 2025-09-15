@@ -22,7 +22,7 @@ const SubAdmin = () => {
       validationSchema: AddSubAdminSchema,
       validateOnChange: true,
       validateOnBlur: true,
-      onSubmit: async (values) => {
+      onSubmit: async (values, { resetForm }) => {
         setSubAdminLoading(true);
         const payload = {
           name: values.name,
@@ -38,6 +38,7 @@ const SubAdmin = () => {
             setAddSubAdminModal(false);
             setAddSuccessModal(true);
             setUpdate((prev) => !prev);
+              resetForm();
           }
         } catch (error) {
           ErrorToast(error?.response?.data?.message);

@@ -42,7 +42,7 @@ const CancelReasonModal = ({
           <p className="text-red-500 text-sm mt-1">{errorReasonDiscription}</p>
         )}
         <div className="flex flex-col justify-center items-center space-y-3 mt-10">
-          <div className="text-[18px] font-[600] text-[#00000080]">Skip</div>
+          <div className="text-[18px] font-[600] cursor-pointer text-[#00000080]"     onClick={onClose}>Skip</div>
           <GlobalButton
             type="submit"
             children={"Submit"}
