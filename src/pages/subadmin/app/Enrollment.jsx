@@ -30,7 +30,7 @@ const Enrollment = () => {
   const [update, setUpdate] = useState(false);
   const [acceptModal, setAcceptModal] = useState(false);
   const [showAddTimeModal, setShowAddTimeModal] = useState(false);
-
+  const [selectedType, setSelectedType] = useState("All");
   const { loading, data } = useGlobal("/admin/get-all-appointments", update);
   const handleCancelChange = (e) => {
     setCancelReasonDiscription(e.target.value);
@@ -90,34 +90,31 @@ const Enrollment = () => {
       setCompleteLoading(false);
     }
   };
- const handleAddTime = async (hour, minutes) => {
-  // total minutes nikal lo
-  const totalMinutes = hour * 60 + minutes;
+  const handleAddTime = async (hour, minutes) => {
+    const totalMinutes = hour * 60 + minutes;
 
-  const payload = {
-    appointmentId: selectedId,
-    time: totalMinutes, // ✅ backend ko clear value bhejna
-  };
+    const payload = {
+      appointmentId: selectedId,
+      time: totalMinutes,
+    };
 
-  setTimeLoading(true);
-  try {
-    const response = await axios.post(
-      "/admin/complete-or-reject-appointment",
-      payload
-    );
-    if (response?.status === 200) {
-      SuccessToast(response?.data?.message);
-      setShowAddTimeModal(false);
-      setUpdate((prev) => !prev);
+    setTimeLoading(true);
+    try {
+      const response = await axios.post(
+        "/admin/complete-or-reject-appointment",
+        payload
+      );
+      if (response?.status === 200) {
+        SuccessToast(response?.data?.message);
+        setShowAddTimeModal(false);
+        setUpdate((prev) => !prev);
+      }
+    } catch (error) {
+      ErrorToast(error?.response?.data?.message);
+    } finally {
+      setTimeLoading(false);
     }
-  } catch (error) {
-    ErrorToast(error?.response?.data?.message);
-  } finally {
-    setTimeLoading(false);
-  }
-};
-
-
+  };
 
   return (
     <div>
@@ -128,6 +125,7 @@ const Enrollment = () => {
         <EnrollmentSliderSkeleton />
       ) : (
         <EnrollmentSlider
+          setSelectedType={setSelectedType}
           selectedId={selectedId}
           setSelectedId={setSelectedId}
           data={data}
@@ -171,6 +169,7 @@ const Enrollment = () => {
         onClose={() => setCancelSuccessFull(false)}
       />
       <AddTimeModal
+        selectedType={selectedType}
         onClose={() => setAcceptModal(false)}
         loading={completeLoading}
         isOpen={acceptModal}

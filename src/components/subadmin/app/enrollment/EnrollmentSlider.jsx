@@ -1,5 +1,6 @@
 import React from "react";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import { PiClockUserDuotone } from "react-icons/pi";
 
 const EnrollmentSlider = ({
   handleCancel,
@@ -9,6 +10,7 @@ const EnrollmentSlider = ({
   completeLoading,
   selectedId,
   setSelectedComplete,
+  setSelectedType,
 }) => {
   // Group users
   const cancelledOrCompleted = data?.All?.filter(
@@ -29,9 +31,24 @@ const EnrollmentSlider = ({
       u.AppointmentStatus === "pending" &&
       new Date(u.AppointmentDate).toISOString().split("T")[0] === today
   );
-  console.log(data?.CurrentlyServing);
+
   return (
     <div className="bg-[#FFFFFF59] p-6 rounded-3xl shadow-md w-full overflow-hidden mt-4">
+      <div className="flex justify-between items-center ">
+        <div></div>
+        {pendingUsers?.length > 0 && (
+          <button
+            onClick={() => {
+              setSelectedId(pendingUsers?.[0]?._id);
+              handleComplete(pendingUsers);
+              setSelectedType("All");
+            }}
+            className="bg-[#5E2E86] flex gap-3 items-center hover:bg-[#4a236a] text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
+          >
+            Add Time <PiClockUserDuotone size={18} />
+          </button>
+        )}
+      </div>
       <div className="flex items-center gap-5 overflow-x-auto no-scrollbar">
         {/* LEFT: cancelled / completed */}
         {cancelledOrCompleted?.slice(0, 4).map((user, index) => (
@@ -77,6 +94,7 @@ const EnrollmentSlider = ({
               <button
                 onClick={() => {
                   setSelectedId(user?._id);
+
                   handleCancel(user?._id);
                 }}
                 className="w-[32px] h-[32px] bg-[#EE3131] text-white rounded-[8px] flex items-center justify-center"
@@ -87,6 +105,7 @@ const EnrollmentSlider = ({
                 onClick={() => {
                   setSelectedId(user._id);
                   setSelectedComplete(user);
+                  setSelectedType("Completed");
                   handleComplete(user);
                 }}
                 className="w-[32px] h-[32px] bg-[#28A745] text-white rounded-[8px] flex items-center justify-center"
