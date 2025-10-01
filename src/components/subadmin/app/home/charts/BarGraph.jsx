@@ -35,10 +35,10 @@ const BarGrap = ({ graphData }) => {
   const cancelledAppointments = graphData?.cancelledAppointments || 0;
 
   const data = {
-    labels: ["Bookings", "Cancellations"],
+    labels: ["Enrollments", "Cancellations"],
     datasets: [
       {
-        label: "Bookings",
+        label: "Enrollments",
         data: [totalAppointments, 0], 
         backgroundColor: (context) => {
           const { ctx, chartArea } = context.chart;
@@ -110,7 +110,7 @@ const BarGrap = ({ graphData }) => {
   return (
     <div className="bg-[#e9f2f4] mt-3 backdrop-blur-[50px] p-5 h-[350px] relative w-full rounded-[16px] ">
       <div className="flex justify-between absolute top-3 right-0 left-0 p-4">
-        <h3 className="font-[700] text-[15.16px] text-[#8A92A6]  ">Bookings</h3>
+        <h3 className="font-[700] text-[15.16px] text-[#8A92A6]  ">Enrollments</h3>
         <div className="flex gap-2 cursor-pointer items-center bg-transparent text-[#8A92A6] outline-none text-[12.77px] font-[400]">
           This Week
           <IoIosArrowDown size={18} color="black" />

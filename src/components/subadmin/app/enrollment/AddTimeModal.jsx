@@ -65,10 +65,10 @@ const AddTimeModal = ({
         </div>
 
         <h2 className="text-center text-[24px] font-[600] text-[#212121] mt-10">
-          Bookings Completed?
+          Enrollments Completed?
         </h2>
         <p className="text-center text-[#565656] text-[16px] mt-1">
-          Is user bookings completed or still running?
+          Is user enrollments completed or still running?
         </p>
 
         <div className="flex justify-between mt-6 gap-4">

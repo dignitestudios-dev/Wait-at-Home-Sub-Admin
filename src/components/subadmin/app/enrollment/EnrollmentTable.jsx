@@ -1,5 +1,4 @@
 import React from "react";
-import Pagination from "../../../global/Pagination";
 import { UserTableSkeleton } from "../../../global/Skeleton";
 import { formatStatus } from "../../../../lib/helpers";
 
@@ -33,13 +32,13 @@ const EnrollmentTable = ({
               </tr>
             </thead>
             <tbody>
-              {data?.length === 0 ? (
+              {data?.All?.length === 0 ? (
                 <tr>
                   <td
                     colSpan="7"
                     className="py-10 text-center text-gray-500 font-medium"
                   >
-                    No Data Found
+                    No enrollments available.
                   </td>
                 </tr>
               ) : (
@@ -99,8 +98,8 @@ const EnrollmentTable = ({
                             )
                           : "N/A"}
                       </td>
-                        <td className="py-4 px-4 text-[12px] font-[500] max-w-[150px] overflow-hidden whitespace-nowrap truncate">
-                        {user?.actionBy || 'N/A'}
+                      <td className="py-4 px-4 text-[12px] font-[500] max-w-[150px] overflow-hidden whitespace-nowrap truncate">
+                        {user?.actionBy || "N/A"}
                       </td>
                       <td className="py-4 px-4 text-[12px] font-[500]">
                         {user?.AppointmentStatus === "cancelled" ? (

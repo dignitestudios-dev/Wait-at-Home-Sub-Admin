@@ -9,7 +9,7 @@ const Sidebar = () => {
 
   // Filter data based on role
   const filteredSidebar = role === "sub-admin" 
-    ? sidebarData.filter(item => item.title !== "Sub Admins")
+    ? sidebarData.filter(item => item.title !== "Sub Admins" && item.title !== "Users" && item.title !== "Dashboard")
     : sidebarData;
 
   return (

@@ -14,7 +14,7 @@ const StateCards = ({ data }) => {
       color: "from-[#684D7B]/2 to-white/10",
     },
     {
-      title: "Bookings",
+      title: "Enrollments",
       value: data?.totalAppointments,
       img: AppoitmentIcon,
       color: "from-white/10 to-white/10",

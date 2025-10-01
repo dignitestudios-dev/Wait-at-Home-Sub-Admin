@@ -83,7 +83,7 @@ const WaitAtHome = ({ handleViewInfo, data }) => {
         </div>
       ) : (
         <div className="text-center text-gray-500 py-10">
-          No bookings found.
+          No enrollments found.
         </div>
       )}
     </div>
