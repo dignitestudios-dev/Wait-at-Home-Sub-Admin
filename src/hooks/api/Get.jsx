@@ -28,6 +28,41 @@ const useGlobal = (url, currentPage = 1, search = "", update = false) => {
 
   return { loading, data, pagination };
 };
+const useFilterGlobal = (
+  url,
+  currentPage = 1,
+  search = "",
+  year = "",
+  update = false
+) => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+  const [pagination, setPagination] = useState({});
+
+  const getGlobal = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(
+        `${url}?page=${currentPage}&search=${search}${
+          year ? `&year=${year}` : ""
+        }`
+      );
+      setData(data?.data);
+      setPagination(data?.pagination);
+    } catch (error) {
+      processError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getGlobal();
+  }, [currentPage, search, year, update]);
+
+  return { loading, data, pagination };
+};
+
 const useFetchById = (url, update = false) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -55,4 +90,4 @@ const useFetchById = (url, update = false) => {
   return { loading, data, pagination };
 };
 
-export { useGlobal, useFetchById };
+export { useGlobal, useFetchById, useFilterGlobal };

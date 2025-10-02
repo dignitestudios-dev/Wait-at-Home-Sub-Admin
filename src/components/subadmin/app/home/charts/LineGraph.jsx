@@ -23,7 +23,7 @@ ChartJS.register(
   Filler
 );
 
-const LineGraph = ({ graphData }) => {
+const LineGraph = ({ graphData, years, setYear, year }) => {
   const labels =
     graphData?.usersByMonth?.map((item) => item.month.slice(0, 3)) || [];
   const counts = graphData?.usersByMonth?.map((item) => item.count) || [];
@@ -111,27 +111,26 @@ const LineGraph = ({ graphData }) => {
 
   return (
     <div className="w-full mt-3">
-      <div className="bg-[#e9f2f4] mt-3 backdrop-blur-[50px] p-5 h-[350px] relative w-full rounded-[16px]">
+      <div className="bg-[#e9f2f4] mt-3 backdrop-blur-[50px] p-5 h-full relative w-full rounded-[16px]">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h2 className="text-gray-600 text-sm font-medium">Users</h2>
+            <h3 className="font-[700] text-[15.16px] text-[#8A92A6]  ">
+              Users
+            </h3>
           </div>
-          <div className="flex items-center text-sm text-gray-500">
-            <span>2025</span>
-            <svg
-              className="w-4 h-4 ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div className="flex justify-between items-center mb-8">
+            <select
+              value={year}
+              onChange={(e) => setYear(Number(e.target.value))}
+              className="px-3 py-2 border rounded-md text-sm bg-white shadow-sm"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
+              {years?.map((yr) => (
+                <option key={yr} value={yr}>
+                  {yr}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
