@@ -1,13 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GraphSkeleton } from "../../../components/global/Skeleton";
 import BarGrap from "../../../components/subadmin/app/home/charts/BarGraph";
 import LineGraph from "../../../components/subadmin/app/home/charts/LineGraph";
 import StateCards from "../../../components/subadmin/app/home/statecards/StateCards";
 import { useFilterGlobal } from "../../../hooks/api/Get";
+import { getChatCount } from "../../../firebase/messages";
 
 const Home = () => {
   const currentYear = new Date().getFullYear();
   const [year, setYear] = useState(currentYear);
+  const [chatCount, setChatCount] = useState(0);
+
+  useEffect(() => {
+    const fetchChatCount = async () => {
+      const count = await getChatCount();
+      setChatCount(count);
+    };
+
+    fetchChatCount();
+  }, []);
 
   const { loading, data } = useFilterGlobal(
     "/admin/admin-dashboard",
@@ -23,7 +34,7 @@ const Home = () => {
 
   return (
     <div>
-      <StateCards data={data} />
+      <StateCards data={data} chatCount={chatCount} />
 
       <div>
         {loading ? (

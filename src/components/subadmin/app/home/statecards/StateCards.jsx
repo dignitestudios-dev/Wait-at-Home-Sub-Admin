@@ -5,7 +5,7 @@ import {
   UserIcon,
 } from "../../../../../assets/export";
 
-const StateCards = ({ data }) => {
+const StateCards = ({ data, chatCount }) => {
   const cards = [
     {
       title: "Total Users",
@@ -21,7 +21,7 @@ const StateCards = ({ data }) => {
     },
     {
       title: "Chat Requests",
-      value: 25,
+      value: chatCount,
       img: ChatRequestIcon,
       color: "from-white/10 to-white/10",
     },

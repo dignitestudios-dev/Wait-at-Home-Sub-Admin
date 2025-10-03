@@ -110,3 +110,7 @@ export const restartChat = async (chatId) => {
     console.error("Error restarting chat:", error);
   }
 };
+export const getChatCount = async () => {
+  const snapshot = await getDocs(collection(db, "Chat"));
+  return snapshot.size; 
+};
