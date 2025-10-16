@@ -123,7 +123,7 @@ const EnrollmentTable = ({
                             setSelectedPet(user.petId);
                             handleViewDetail(user);
                           }}
-                          className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-1 h-[28px] rounded-md text-[12px] font-[500]"
+                          className="bg-teal-500 text-nowrap hover:bg-teal-600 text-white px-4 py-1 h-[28px] rounded-md text-[12px] font-[500]"
                         >
                           View Details
                         </button>

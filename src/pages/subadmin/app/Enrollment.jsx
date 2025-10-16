@@ -121,11 +121,12 @@ const Enrollment = () => {
       <h1 className="text-[24px] font-[600] text-[#5E2E86] capitalize">
         Wait at home queue
       </h1>
-      
+
       {loading ? (
         <EnrollmentSliderSkeleton />
       ) : (
         <EnrollmentSlider
+          setUpdate={setUpdate}
           setSelectedType={setSelectedType}
           selectedId={selectedId}
           setSelectedId={setSelectedId}

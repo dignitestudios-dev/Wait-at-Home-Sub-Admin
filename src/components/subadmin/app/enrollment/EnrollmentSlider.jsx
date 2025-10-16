@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { PiClockUserDuotone } from "react-icons/pi";
-
+import StartTimeModal from "./StartTimeModal";
 const EnrollmentSlider = ({
   handleCancel,
   data,
@@ -11,16 +11,17 @@ const EnrollmentSlider = ({
   selectedId,
   setSelectedComplete,
   setSelectedType,
+  setUpdate,
 }) => {
-  // Group users
+  const [showModal, setShowModal] = useState(false);
+
   const cancelledOrCompleted = data?.All?.filter(
     (u) =>
       u.AppointmentStatus === "cancelled" || u.AppointmentStatus === "completed"
   );
-  // Get today's date (yyyy-mm-dd format)
+
   const today = new Date().toISOString().split("T")[0];
 
-  // Currently serving filter (only today)
   const currentlyServing = data?.All?.filter(
     (u) =>
       u.currentlyServing === true && u.AppointmentDate?.split("T")[0] === today
@@ -34,6 +35,9 @@ const EnrollmentSlider = ({
 
   return (
     <div className="bg-[#FFFFFF59] p-6 rounded-3xl shadow-md w-full overflow-hidden mt-4">
+      <div className="flex justify- items-center ">
+        <div></div>
+      </div>
       {data?.All?.length === 0 ? (
         <p className="text-center text-[#565656] text-[16px]">
           No enrollments available.
@@ -41,7 +45,13 @@ const EnrollmentSlider = ({
       ) : (
         <>
           <div className="flex justify-between items-center ">
-            <div></div>
+          <button
+            onClick={() => setShowModal(true)}
+            className="bg-[#00AAAD] mb-4 flex gap-3 items-center  text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
+          >
+            Start Time <PiClockUserDuotone size={18} />
+          </button>
+          
             {pendingUsers?.length > 0 && (
               <button
                 onClick={() => {
@@ -49,7 +59,7 @@ const EnrollmentSlider = ({
                   handleComplete(pendingUsers);
                   setSelectedType("All");
                 }}
-                className="bg-[#5E2E86] flex gap-3 items-center hover:bg-[#4a236a] text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
+                className="bg-[#5E2E86] mb-4 flex gap-3 items-center hover:bg-[#4a236a] text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
               >
                 Add Time <PiClockUserDuotone size={18} />
               </button>
@@ -160,6 +170,7 @@ const EnrollmentSlider = ({
           </div>
         </>
       )}
+      {showModal && <StartTimeModal setUpdate={setUpdate} onClose={() => setShowModal(false)} />}
     </div>
   );
 };

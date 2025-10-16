@@ -13,7 +13,7 @@ const AddTimeModal = ({
   selectedType,
 }) => {
   if (!isOpen) return null;
-  console.log(selectedType, "selectedType");
+  
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
       <div className="bg-gradient-to-br from-[#A0E6E1] to-[#C3B4D3] w-[471px] h-[340px] rounded-[32px] flex flex-col items-center p-6  justify-center">
