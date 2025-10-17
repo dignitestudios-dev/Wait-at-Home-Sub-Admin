@@ -14,17 +14,24 @@ const PushNotification = () => {
     description: Yup.string()
       .required("Description is required")
       .min(5, "Description must be at least 5 characters"),
+    scheduleAt: Yup.string().required("Please select date & time"),
   });
   const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
     useFormik({
-      initialValues: { title: "", description: "" },
+      initialValues: { title: "", description: "", scheduleAt: "" },
       validationSchema: validateSchema,
       validateOnChange: true,
       validateOnBlur: true,
       onSubmit: async (values, { resetForm }) => {
+        const localDate = new Date(values.scheduleAt);
+        const utcDate = new Date(
+          localDate.getTime() - localDate.getTimezoneOffset() * 60000
+        ).toISOString();
+
         const data = {
-          title: values?.title,
-          message: values?.description,
+          title: values.title,
+          message: values.description,
+          scheduleAt: utcDate, // 👈 sends e.g. 2025-08-28T11:41:23.130Z
         };
         setLoading(true);
         try {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { PiClockUserDuotone } from "react-icons/pi";
 import StartTimeModal from "./StartTimeModal";
+import EndTimeModal from "./EndTimeModal";
 const EnrollmentSlider = ({
   handleCancel,
   data,
@@ -12,8 +13,11 @@ const EnrollmentSlider = ({
   setSelectedComplete,
   setSelectedType,
   setUpdate,
+  startTime,
+  startTimeloader,
 }) => {
   const [showModal, setShowModal] = useState(false);
+  const [endShowModal, setEndShowModal] = useState(false);
 
   const cancelledOrCompleted = data?.All?.filter(
     (u) =>
@@ -33,6 +37,7 @@ const EnrollmentSlider = ({
       new Date(u.AppointmentDate).toISOString().split("T")[0] === today
   );
 
+
   return (
     <div className="bg-[#FFFFFF59] p-6 rounded-3xl shadow-md w-full overflow-hidden mt-4">
       <div className="flex justify- items-center ">
@@ -45,13 +50,25 @@ const EnrollmentSlider = ({
       ) : (
         <>
           <div className="flex justify-between items-center ">
-          <button
-            onClick={() => setShowModal(true)}
-            className="bg-[#00AAAD] mb-4 flex gap-3 items-center  text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
-          >
-            Start Time <PiClockUserDuotone size={18} />
-          </button>
-          
+            {startTime?.isServingActive === false && (
+              <button
+                onClick={() => setShowModal(true)}
+                className="bg-[#00AAAD] mb-4 flex gap-3 items-center  text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
+              >
+                Start Time <PiClockUserDuotone size={18} />
+              </button>
+            )}
+            {startTime?.isServingActive &&
+              data?.CurrentlyServing?.length === 0 &&
+              pendingUsers?.length === 0 && (
+                <button
+                  onClick={() => setEndShowModal(true)}
+                  className="bg-[#5E2E86] ms-auto mb-4 flex gap-3 items-center text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
+                >
+                  End Time <PiClockUserDuotone size={18} />
+                </button>
+              )}
+
             {pendingUsers?.length > 0 && (
               <button
                 onClick={() => {
@@ -59,7 +76,7 @@ const EnrollmentSlider = ({
                   handleComplete(pendingUsers);
                   setSelectedType("All");
                 }}
-                className="bg-[#5E2E86] mb-4 flex gap-3 items-center hover:bg-[#4a236a] text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
+                className="bg-[#5E2E86] ms-auto mb-4 flex gap-3 items-center hover:bg-[#4a236a] text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
               >
                 Add Time <PiClockUserDuotone size={18} />
               </button>
@@ -106,9 +123,9 @@ const EnrollmentSlider = ({
                     {user?.signUpRecord?.name?.substring(0, 2).toUpperCase()}
                   </div>
                 )}
-                <p className="text-xs text-[#000000] font-[600] mt-1">
+                {/* <p className="text-xs text-[#000000] font-[600] mt-1">
                   -{user?.appointmentDuration} min
-                </p>
+                </p> */}
 
                 {/* Buttons */}
                 <div className="flex gap-2 mt-2">
@@ -158,9 +175,9 @@ const EnrollmentSlider = ({
                     {user?.signUpRecord?.name?.substring(0, 2).toUpperCase()}
                   </div>
                 )}
-                <p className="text-xs text-[#5E2E86] font-[600] mt-1">
+                {/* <p className="text-xs text-[#5E2E86] font-[600] mt-1">
                   {user?.appointmentDuration} min
-                </p>
+                </p> */}
               </div>
             ))}
           </div>
@@ -170,7 +187,18 @@ const EnrollmentSlider = ({
           </div>
         </>
       )}
-      {showModal && <StartTimeModal setUpdate={setUpdate} onClose={() => setShowModal(false)} />}
+      {showModal && (
+        <StartTimeModal
+          setUpdate={setUpdate}
+          onClose={() => setShowModal(false)}
+        />
+      )}
+      {endShowModal && (
+        <EndTimeModal
+          setUpdate={setUpdate}
+          onClose={() => setEndShowModal(false)}
+        />
+      )}
     </div>
   );
 };

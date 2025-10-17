@@ -32,6 +32,10 @@ const Enrollment = () => {
   const [showAddTimeModal, setShowAddTimeModal] = useState(false);
   const [selectedType, setSelectedType] = useState("All");
   const { loading, data } = useGlobal("/admin/get-all-appointments", update);
+  const { loading: startTimeloader, data: startTime } = useGlobal(
+    "/admin/get-config",
+    update
+  );
   const handleCancelChange = (e) => {
     setCancelReasonDiscription(e.target.value);
     if (e.target.value.trim() !== "") {
@@ -126,6 +130,8 @@ const Enrollment = () => {
         <EnrollmentSliderSkeleton />
       ) : (
         <EnrollmentSlider
+          startTimeloader={startTimeloader}
+          startTime={startTime}
           setUpdate={setUpdate}
           setSelectedType={setSelectedType}
           selectedId={selectedId}

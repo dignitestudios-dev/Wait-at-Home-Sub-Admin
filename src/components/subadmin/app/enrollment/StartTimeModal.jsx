@@ -15,6 +15,7 @@ const StartTimeModal = ({ onClose, setUpdate }) => {
       setSaving(true);
       const response = await axios.post("/admin/update-config", {
         maxServings: Number(maxServings),
+        isServingActive: true,
         averageWaitingTimeMinutes: Number(averageWaitingTime),
       });
 
