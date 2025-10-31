@@ -63,7 +63,13 @@ const UserTable = ({
                         />
                       ) : (
                         <div className="w-[32px] h-[32px] rounded-full flex items-center justify-center text-[12px] font-bold bg-[#10C0B6] text-white">
-                          {user?.name?.substring(0, 2)?.toUpperCase()}
+                         {user?.name
+                          ? user?.name
+                              .split(" ")
+                              .map((word) => word[0])
+                              .join("")
+                              .slice(0, 2)
+                          : ""}{" "}
                         </div>
                       )}
                       {user?.name}
@@ -78,13 +84,14 @@ const UserTable = ({
                       {user.pets.length}
                     </td>
                     <td className="py-4 px-4 text-[12px] font-[500]">
-                      {user?.createdAt
-                        ? new Date(user.createdAt).toLocaleDateString("en-GB", {
-                            day: "2-digit",
-                            month: "short",
-                            year: "numeric",
-                          })
-                        : "N/A"}
+                    {user?.createdAt
+  ? new Date(user.createdAt).toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    })
+  : "N/A"}
+
                     </td>
                     <td className="py-4 px-4 text-[12px] font-[500]">
                       <button

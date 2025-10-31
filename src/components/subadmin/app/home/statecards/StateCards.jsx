@@ -14,7 +14,7 @@ const StateCards = ({ data, chatCount }) => {
       color: "from-[#684D7B]/2 to-white/10",
     },
     {
-      title: "Enrollments",
+      title: "Accounts Created",
       value: data?.totalAppointments,
       img: AppoitmentIcon,
       color: "from-white/10 to-white/10",
