@@ -3,14 +3,21 @@ import { sidebarData } from "../../static/Sidebar";
 import { LogoDashboard, Logout } from "../../assets/export";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 const Sidebar = () => {
   const { handleLogout, role } = useContext(AppContext);
 
   // Filter data based on role
-  const filteredSidebar = role === "sub-admin" 
-    ? sidebarData.filter(item => item.title !== "Sub Admins" && item.title !== "Users" && item.title !== "Dashboard")
-    : sidebarData;
+  const filteredSidebar =
+    role === "sub-admin"
+      ? sidebarData.filter(
+          (item) =>
+            item.title !== "Sub Admins" &&
+            item.title !== "Users" &&
+            item.title !== "Dashboard"
+        )
+      : sidebarData;
 
   return (
     <div className="w-[282px] h-full rounded-[30px] mt-3 bg-gradient-to-tl from-[#684D7B] to-[#10C0B6] overflow-y-auto px-4 py-6 flex flex-col gap-4 items-start">
@@ -38,9 +45,10 @@ const Sidebar = () => {
 
       <button
         onClick={handleLogout}
-        className="mt-auto flex justify-center items-center gap-3 text-[18px] w-full h-[46px] bg-[#FFFFFF] text-[#EE3131] font-[500] rounded-[16px] transition-all duration-150"
+        className="mt-auto flex justify-center items-center gap-3 text-[18px] w-full h-[46px] bg-[#FFFFFF] text-[#10C0B6] font-[500] rounded-[16px] transition-all duration-150"
       >
-        <img src={Logout} className="w-[24px] h-[24px]" alt="" /> Logout
+        <RiLogoutCircleLine color="#10C0B6" className="transform rotate-90" />
+        Logout
       </button>
     </div>
   );
