@@ -25,13 +25,12 @@ const NotificationForm = ({
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder="Type Here...."
-            label="Title of Notification"
+            label="Subject"
           />
 
           {/* Description */}
           <label className="block mb-1 text-sm font-medium text-[#333] capitalize">
-            Description of Notification
-          </label>
+Message          </label>
           <textarea
             name="description"
             rows={6}

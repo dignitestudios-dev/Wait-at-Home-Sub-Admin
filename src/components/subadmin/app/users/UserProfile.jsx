@@ -35,7 +35,13 @@ const UserProfile = ({
               />
             ) : (
               <div className="w-[135px] h-[135px] rounded-full flex items-center justify-center bg-[#10C0B6] text-white text-[36px] font-bold">
-                {data?.name?.substring(0, 2)?.toUpperCase()}
+                  {data?.name
+                          ? data?.name
+                              .split(" ")
+                              .map((word) => word[0])
+                              .join("")
+                              .slice(0, 2)
+                          : ""}{" "}
               </div>
             )}
           </div>

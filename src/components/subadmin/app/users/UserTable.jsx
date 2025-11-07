@@ -78,21 +78,23 @@ const UserTable = ({
                       {user.email}
                     </td>
                     <td className="py-4 px-4 text-[12px] font-[500]">
-                      {user?.phone ? `+1 ${phoneFormater(user.phone)}` : "N/A"}
+                      {user?.phone ? `${phoneFormater(user.phone)}` : "N/A"}
                     </td>
                     <td className="py-4 px-4 text-[12px] font-[500]">
                       {user.pets.length}
                     </td>
-                    <td className="py-4 px-4 text-[12px] font-[500]">
-                    {user?.createdAt
-  ? new Date(user.createdAt).toLocaleDateString("en-US", {
-      month: "short",
-      day: "2-digit",
-      year: "numeric",
-    })
-  : "N/A"}
+                 <td className="py-4 px-4 text-[12px] font-[500]">
+  {user?.createdAt
+    ? new Date(user.createdAt).toLocaleDateString("en-US", {
+        month: "long", // "October" instead of "Oct"
+        day: "2-digit",
+        year: "numeric",
+      })
+    : "N/A"}
+</td>
 
-                    </td>
+
+                    
                     <td className="py-4 px-4 text-[12px] font-[500]">
                       <button
                         onClick={() =>
