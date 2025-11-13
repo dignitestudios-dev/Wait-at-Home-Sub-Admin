@@ -4,6 +4,7 @@ import ResponseBlock from "./ResponseBlock";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 import { formatTime } from "../../../../lib/helpers";
+import { IoMdCheckmark } from "react-icons/io";
 
 const InitializedChatView = ({
   selectedChat,
@@ -59,7 +60,7 @@ const InitializedChatView = ({
       </div>
 
       <div className="flex justify-center gap-2 mx-auto my-2 h-[40px] items-center w-[187px] px-4 py-2 bg-[#FFFFFF59] text-[#000000] font-[500] text-[14px] rounded-full">
-        <LiaCheckDoubleSolid size={22} /> Chat Started
+        <IoMdCheckmark size={22} /> Chat Started
       </div>
 
       <MessageList messages={messages} userId={userId} />
