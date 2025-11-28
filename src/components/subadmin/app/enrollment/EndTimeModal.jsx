@@ -31,13 +31,13 @@ const EndTimeModal = ({ onClose, setUpdate }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
       <div className="bg-white w-[400px] rounded-2xl p-6 shadow-xl animate-fadeIn">
         <h2 className="text-xl font-bold text-[#5E2E86] text-center mb-3">
-          End Serving Time?
+          End Waiting List?
         </h2>
 
         <p className="text-gray-700 text-center mb-6 leading-relaxed">
           Are you sure you want to{" "}
           <span className="font-semibold text-[#5E2E86]">
-            end today's serving time?
+            end today's waiting list?
           </span>
         </p>
 
