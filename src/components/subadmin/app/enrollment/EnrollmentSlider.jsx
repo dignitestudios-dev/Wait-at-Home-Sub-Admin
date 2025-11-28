@@ -65,7 +65,7 @@ const EnrollmentSlider = ({
                   onClick={() => setEndShowModal(true)}
                   className="bg-[#5E2E86] ms-auto mb-4 flex gap-3 items-center text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
                 >
-                  End Time <PiClockUserDuotone size={18} />
+                  End Time/End Serving Time <PiClockUserDuotone size={18} />
                 </button>
               )}
 

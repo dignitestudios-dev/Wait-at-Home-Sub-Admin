@@ -13,10 +13,9 @@ const SelectTimeModal = ({ isOpen, onClose, onAddTime, timeLoading }) => {
 
   if (!isOpen) return null;
 
- const handleAddTime = () => {
-  onAddTime({ hours, minutes });
-};
-
+  const handleAddTime = () => {
+    onAddTime({ hours, minutes });
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
@@ -25,7 +24,7 @@ const SelectTimeModal = ({ isOpen, onClose, onAddTime, timeLoading }) => {
         <div className="flex items-center justify-between mb-3 ">
           {/* Title */}
           <h2 className="text-lg font-semibold  text-gray-800">
-            Add More Time
+            Would You Like To Add More Time
           </h2>
           <div
             onClick={onClose}

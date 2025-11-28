@@ -41,8 +41,9 @@ const StartTimeModal = ({ onClose, setUpdate }) => {
 
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1">
-            Quantity (max servings)
+            Number of staff working today
           </label>
+          <p className="text-[12px] text-gray-600 mb-3 ">Total staff available to serve pets.</p>
           <input
             type="number"
             value={maxServings}
@@ -56,6 +57,8 @@ const StartTimeModal = ({ onClose, setUpdate }) => {
           <label className="block text-sm font-medium mb-1">
             Average waiting time
           </label>
+                    <p className="text-[12px] text-gray-600 mb-3 ">Estimated time needed to serve each pet.</p>
+
           <select
             value={averageWaitingTime}
             onChange={(e) => setAverageWaitingTime(e.target.value)}

@@ -19,13 +19,11 @@ const EnrollmentTable = ({
           <table className="w-full text-left text-sm text-gray-700">
             <thead className="bg-white text-[#5E5E5E] uppercase font-[700] text-[12px]">
               <tr>
-                <th className="py-4 px-4">S.No</th>
+                <th className="py-4 px-4">#</th>
                 <th className="py-4 px-4">Name</th>
                 <th className="py-4 px-4">Pet name</th>
                 <th className="py-4 px-4">Issue summary</th>
-                <th className="py-4 px-4">
-                  people currently in the waiting list
-                </th>
+                <th className="py-4 px-4">sign up time</th>
                 <th className="py-4 px-4">Action By</th>
                 <th className="py-4 px-4">Status</th>
                 <th className="py-4 px-4">Action</th>

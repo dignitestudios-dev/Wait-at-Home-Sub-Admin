@@ -31,7 +31,7 @@ const UserTable = ({
           <table className="w-full text-left text-sm text-gray-700">
             <thead className="bg-white text-[#5E5E5E] uppercase font-[700] text-[12px]">
               <tr>
-                <th className="py-4 px-4">S.No</th>
+                <th className="py-4 px-4">#</th>
                 <th className="py-4 px-4">Name</th>
                 <th className="py-4 px-4">Email</th>
                 <th className="py-4 px-4">Contact No.</th>
