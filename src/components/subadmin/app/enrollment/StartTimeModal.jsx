@@ -36,14 +36,14 @@ const StartTimeModal = ({ onClose, setUpdate }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-2xl p-6 w-[380px] shadow-lg animate-fadeIn">
         <h2 className="text-lg font-semibold mb-4 text-[#5E2E86]">
-          Set Start Time Configuration
+          Set Time Frames
         </h2>
 
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1">
-            Number of staff working today
+            Number of staff on duty
           </label>
-          <p className="text-[12px] text-gray-600 mb-3 ">Total staff available to serve pets.</p>
+          {/* <p className="text-[12px] text-gray-600 mb-3 ">Total staff available to serve pets.</p> */}
           <input
             type="number"
             value={maxServings}
@@ -55,9 +55,9 @@ const StartTimeModal = ({ onClose, setUpdate }) => {
 
         <div className="mb-6">
           <label className="block text-sm font-medium mb-1">
-            Average waiting time
+            Average exam time
           </label>
-                    <p className="text-[12px] text-gray-600 mb-3 ">Estimated time needed to serve each pet.</p>
+                    {/* <p className="text-[12px] text-gray-600 mb-3 ">Estimated time needed to serve each pet.</p> */}
 
           <select
             value={averageWaitingTime}
