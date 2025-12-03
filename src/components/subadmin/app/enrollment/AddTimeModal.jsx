@@ -13,10 +13,10 @@ const AddTimeModal = ({
   selectedType,
 }) => {
   if (!isOpen) return null;
-  
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
-      <div className="bg-gradient-to-br from-[#A0E6E1] to-[#C3B4D3] w-[471px] h-[340px] rounded-[32px] flex flex-col items-center p-6  justify-center">
+      <div className="bg-gradient-to-br from-[#A0E6E1] to-[#C3B4D3] w-[471px]  rounded-[32px] flex flex-col items-center p-6  justify-center">
         <div
           onClick={onClose}
           className="flex ms-auto border cursor-pointer rounded-[4px] "
@@ -65,9 +65,11 @@ const AddTimeModal = ({
         </div>
 
         <h2 className="text-center capitalize text-[24px] font-[600] text-[#212121] mt-10">
-Appointment completed        </h2>
+          Would you like to add more time to this consultation?
+        </h2>
         <p className="text-center text-[#565656] text-[16px] mt-1">
-          Is user appointment completed or still running?
+          Please be aware that extending the session will affect the estimated
+          wait times for all users currently in the queue.
         </p>
 
         <div className="flex justify-between mt-6 gap-4">

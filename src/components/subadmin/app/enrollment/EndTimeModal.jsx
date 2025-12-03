@@ -31,18 +31,18 @@ const EndTimeModal = ({ onClose, setUpdate }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
       <div className="bg-white w-[400px] rounded-2xl p-6 shadow-xl animate-fadeIn">
         <h2 className="text-xl font-bold text-[#5E2E86] text-center mb-3">
-          End Current Session?{" "}
+          End The Current Session?{" "}
         </h2>
 
         <p className="text-gray-700 text-center mb-6 leading-relaxed">
           Are you sure you want to{" "}
           <span className="font-semibold text-[#5E2E86]">
-             End Current Session?
+            End The Current Session?{" "}
           </span>
         </p>
 
         <div className="flex justify-center gap-3 mt-4">
-           <button
+          <button
             onClick={handleConfirmEnd}
             disabled={saving}
             className={`px-5 py-2 rounded-lg w-[200px] text-white font-semibold transition-all duration-300 ${
@@ -60,8 +60,6 @@ const EndTimeModal = ({ onClose, setUpdate }) => {
           >
             No
           </button>
-
-         
         </div>
       </div>
     </div>
