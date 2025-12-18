@@ -1,24 +1,27 @@
 export const sidebarData = [
-  {
+ {
+    title: "Waiting List",
+    // icon: "home", Use this if you want to add icons
+    link: "/app/enrollment",
+  },
+   {
+    title: "Chat",
+    // icon: "home", Use this if you want to add icons
+    link: "/app/chat",
+  },
+    {
     title: "Dashboard",
     // icon: "home", Use this if you want to add icons
     link: "/app/dashboard",
   },
+  
   {
     title: "Users",
     // icon: "home", Use this if you want to add icons
     link: "/app/users",
   },
-  {
-    title: "Waiting List",
-    // icon: "home", Use this if you want to add icons
-    link: "/app/enrollment",
-  },
-  {
-    title: "Chat",
-    // icon: "home", Use this if you want to add icons
-    link: "/app/chat",
-  },
+ 
+ 
   {
     title: "Sub Admins",
     // icon: "home", Use this if you want to add icons

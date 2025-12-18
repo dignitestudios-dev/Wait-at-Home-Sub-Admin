@@ -34,7 +34,7 @@ const Login = () => {
           if (response?.status === 200) {
             SuccessToast(response?.data?.message);
             Auth(response?.data);
-            navigate("/app/dashboard");
+            navigate("/app/enrollment");
           }
         } catch (error) {
           ErrorToast(error?.response?.data?.message);
@@ -54,8 +54,8 @@ const Login = () => {
         />
       </div>
       <div className="w-auto flex flex-col mt-4 justify-center items-center">
-        <h2 className="text-[32px] font-[600] leading-[48px] capitalize">
-          log in As Administrator Login
+        <h2 className="text-[22px] font-[600] leading-[48px] capitalize">
+          log in  Administrator Login / Sub Admin
         </h2>
         <p className="text-[13px] font-[400] text-center leading-[27px] text-[#565656]">
           Welcome back! Enter your details to login

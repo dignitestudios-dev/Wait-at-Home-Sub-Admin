@@ -65,12 +65,12 @@ const AddTimeModal = ({
         </div>
 
         <h2 className="text-center capitalize text-[24px] font-[600] text-[#212121] mt-10">
-          Would you like to add more time to this consultation?
+          Would you like to end this examination
         </h2>
-        <p className="text-center text-[#565656] text-[16px] mt-1">
+        {/* <p className="text-center text-[#565656] text-[16px] mt-1">
           Please be aware that extending the session will affect the estimated
           wait times for all users currently in the queue.
-        </p>
+        </p> */}
 
         <div className="flex justify-between mt-6 gap-4">
           {selectedType == "All" ? (

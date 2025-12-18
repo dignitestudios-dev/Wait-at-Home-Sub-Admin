@@ -64,7 +64,7 @@ const WaitAtHome = ({ handleViewInfo, data }) => {
             <div className="flex gap-2 min-w-[200px]">
               <CiClock2 size={24} color="#5E2E86" />
               <p className="text-[14px] text-nowrap text-[#565656] font-[500]">
-                Waiting List:
+               Time of Enrollment:
               </p>
               <span className="text-[#5E2E86] text-nowrap text-[14px] font-[600]">
                 {appointment.updatedAt
