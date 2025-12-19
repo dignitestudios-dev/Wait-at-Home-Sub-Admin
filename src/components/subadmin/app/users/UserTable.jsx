@@ -36,6 +36,7 @@ const UserTable = ({
                 <th className="py-4 px-4">Email</th>
                 <th className="py-4 px-4">Contact No.</th>
                 <th className="py-4 px-4">Pets Profile</th>
+                <th className="py-4 px-4">User type</th>
                 <th className="py-4 px-4">Registration Date</th>
                 <th className="py-4 px-4">Action</th>
               </tr>
@@ -63,13 +64,13 @@ const UserTable = ({
                         />
                       ) : (
                         <div className="w-[32px] h-[32px] rounded-full flex items-center justify-center text-[12px] font-bold bg-[#10C0B6] text-white">
-                         {user?.name
-                          ? user?.name
-                              .split(" ")
-                              .map((word) => word[0])
-                              .join("")
-                              .slice(0, 2)
-                          : ""}{" "}
+                          {user?.name
+                            ? user?.name
+                                .split(" ")
+                                .map((word) => word[0])
+                                .join("")
+                                .slice(0, 2)
+                            : ""}{" "}
                         </div>
                       )}
                       {user?.name}
@@ -83,18 +84,21 @@ const UserTable = ({
                     <td className="py-4 px-4 text-[12px] font-[500]">
                       {user.pets.length}
                     </td>
-                 <td className="py-4 px-4 text-[12px] font-[500]">
-  {user?.createdAt
-    ? new Date(user.createdAt).toLocaleDateString("en-US", {
-        month: "long", // "October" instead of "Oct"
-        day: "2-digit",
-        year: "numeric",
-      })
-    : "N/A"}
-</td>
+                    <td className="py-4 px-4 text-[12px] font-[500]">
+                      {user?.pets?.signUpRecord?.isUserRegistered ===true
+                        ? "Sign Up"
+                        : "Temporary"}
+                    </td>
+                    <td className="py-4 px-4 text-[12px] font-[500]">
+                      {user?.createdAt
+                        ? new Date(user.createdAt).toLocaleDateString("en-US", {
+                            month: "long", // "October" instead of "Oct"
+                            day: "2-digit",
+                            year: "numeric",
+                          })
+                        : "N/A"}
+                    </td>
 
-
-                    
                     <td className="py-4 px-4 text-[12px] font-[500]">
                       <button
                         onClick={() =>

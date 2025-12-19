@@ -64,8 +64,10 @@ const AddTimeModal = ({
           )}
         </div>
 
-        <h2 className="text-center capitalize text-[24px] font-[600] text-[#212121] mt-10">
-          Would you like to end this examination
+        <h2 className="text-center capitalize text-[24px] font-[600] text-[#212121] mt-5">
+          {selectedType === "All"
+            ? "Would you like to add extra time to your exam?"
+            : "Are you sure you have completed the exam?"}
         </h2>
         {/* <p className="text-center text-[#565656] text-[16px] mt-1">
           Please be aware that extending the session will affect the estimated
@@ -81,12 +83,21 @@ const AddTimeModal = ({
               Add Time
             </button>
           ) : (
-            <button
-              onClick={onComplete}
-              className="text-[14px] w-[204px] py-3 bg-white border border-gray-300 text-[#00AAAD] font-semibold rounded-[12px] shadow hover:bg-gray-100"
-            >
-              {loading ? "Completing..." : "Completed"}
-            </button>
+            <>
+              <button
+                onClick={onComplete}
+                className="text-[14px] w-[204px] py-3 bg-white border border-gray-300 text-[#00AAAD] font-semibold rounded-[12px] shadow hover:bg-gray-100"
+              >
+                {loading ? "Yes..." : "Yes"}
+              </button>
+              <button
+                onClick={onClose}
+                className="text-[14px] w-[204px] py-3 bg-[#5E2E86] border border-gray-300 text-white font-semibold rounded-[12px] shadow"
+              >
+              No
+              </button>
+            
+            </>
           )}
         </div>
       </div>

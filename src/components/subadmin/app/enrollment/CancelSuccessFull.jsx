@@ -16,9 +16,9 @@ const CancelSuccessFull = ({ isOpen, onClose }) => {
             <img src={Tick} className="h-[62px] w-[62px]" alt="Success Tick" />
           </div>
           <h2 className="text-[24px] font-[600]">Cancelled Successfully</h2>
-          <p className="text-[16px] font-[400] text-[#565656] max-w-[350px]">
+          {/* <p className="text-[16px] font-[400] text-[#565656] max-w-[350px]">
             Your sign up time has been cancelled successfully
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
