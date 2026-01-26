@@ -1,22 +1,34 @@
 import React, { useState } from "react";
 import { ErrorToast, SuccessToast } from "../../../global/Toaster";
 import axios from "../../../../axios";
-const StartTimeModal = ({ onClose, setUpdate }) => {
+const StartTimeModal = ({ onClose, setUpdate, type }) => {
   const [maxServings, setMaxServings] = useState("");
   const [averageWaitingTime, setAverageWaitingTime] = useState("");
   const [saving, setSaving] = useState(false);
 
   const handleSaveConfig = async () => {
-    if (!maxServings || !averageWaitingTime) {
-      return ErrorToast("Please fill in all fields.");
+    if (type === "quantity" && !maxServings) {
+      return ErrorToast("Please enter quantity.");
     }
+
+    if (type === "time" && !averageWaitingTime) {
+      return ErrorToast("Please select time.");
+    }
+    const payload =
+      type === "quantity"
+        ? {
+          maxServings: Number(maxServings),
+        }
+        : {
+          averageWaitingTimeMinutes: Number(averageWaitingTime),
+        };
 
     try {
       setSaving(true);
       const response = await axios.post("/admin/update-config", {
-        maxServings: Number(maxServings),
+        ...payload,
         isServingActive: true,
-        averageWaitingTimeMinutes: Number(averageWaitingTime),
+
       });
 
       if (response?.status === 200) {
@@ -36,42 +48,48 @@ const StartTimeModal = ({ onClose, setUpdate }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-2xl p-6 w-[380px] shadow-lg animate-fadeIn">
         <h2 className="text-lg font-semibold mb-4 text-[#5E2E86]">
-          Set Time Frames
+          {type === "quantity" ? "Add Quantity" : "Set Time Frames"}
         </h2>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-1">
-            Number of staff on duty
-          </label>
-          {/* <p className="text-[12px] text-gray-600 mb-3 ">Total staff available to serve pets.</p> */}
-          <input
-            type="number"
-            value={maxServings}
-            onChange={(e) => setMaxServings(e.target.value)}
-            placeholder="Enter quantity"
-            className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#5E2E86]"
-          />
-        </div>
 
-        <div className="mb-6">
-          <label className="block text-sm font-medium mb-1">
-            Average exam time
-          </label>
-          {/* <p className="text-[12px] text-gray-600 mb-3 ">Estimated time needed to serve each pet.</p> */}
+        {type === "quantity" && (
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-1">
+              Number of staff on duty
+            </label>
+            {/* <p className="text-[12px] text-gray-600 mb-3 ">Total staff available to serve pets.</p> */}
+            <input
+              type="number"
+              value={maxServings}
+              onChange={(e) => setMaxServings(e.target.value)}
+              placeholder="Enter quantity"
+              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#5E2E86]"
+            />
+          </div>
+        )}
 
-          <select
-            value={averageWaitingTime}
-            onChange={(e) => setAverageWaitingTime(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#5E2E86]"
-          >
-            <option value="">Select time</option>
-            <option value="10">10 minutes</option>
-            <option value="15">15 minutes</option>
-            <option value="20">20 minutes</option>
-            <option value="30">30 minutes</option>
-            <option value="45">45 minutes</option>
-          </select>
-        </div>
+        {type === "time" && (
+
+          <div className="mb-6">
+            <label className="block text-sm font-medium mb-1">
+              Average exam time
+            </label>
+            {/* <p className="text-[12px] text-gray-600 mb-3 ">Estimated time needed to serve each pet.</p> */}
+
+            <select
+              value={averageWaitingTime}
+              onChange={(e) => setAverageWaitingTime(e.target.value)}
+              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#5E2E86]"
+            >
+              <option value="">Select time</option>
+              <option value="10">10 minutes</option>
+              <option value="15">15 minutes</option>
+              <option value="20">20 minutes</option>
+              <option value="30">30 minutes</option>
+              <option value="45">45 minutes</option>
+            </select>
+          </div>
+        )}
 
         <div className="flex justify-end gap-3">
           <button

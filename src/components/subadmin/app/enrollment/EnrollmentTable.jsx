@@ -1,6 +1,8 @@
 import React from "react";
 import { UserTableSkeleton } from "../../../global/Skeleton";
 import { formatStatus } from "../../../../lib/helpers";
+import { FaCheck, FaTimes } from "react-icons/fa";
+import { BsEye } from "react-icons/bs";
 
 const EnrollmentTable = ({
   handleViewCancel,
@@ -9,6 +11,11 @@ const EnrollmentTable = ({
   setSelectedCancel,
   loading,
   setSelectedPet,
+  setSelectedId,
+  handleCancel,
+  handleComplete,
+  setSelectedComplete,
+  setSelectedType
 }) => {
   return (
     <div className="mt-6">
@@ -87,13 +94,13 @@ const EnrollmentTable = ({
                       <td className="py-4 px-10  text-[12px] font-[500] ">
                         {user?.createdAt
                           ? new Date(user?.createdAt).toLocaleTimeString(
-                              "en-US",
-                              {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                                hour12: true,
-                              }
-                            )
+                            "en-US",
+                            {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            }
+                          )
                           : "N/A"}
                       </td>
                       <td className="py-4 px-4 text-[12px] font-[500] max-w-[150px] overflow-hidden whitespace-nowrap truncate">
@@ -115,7 +122,32 @@ const EnrollmentTable = ({
                         )}
                       </td>
 
-                      <td className="py-4 px-4  text-[12px] font-[500] ">
+                      <td className="py-4 px-4  text-[12px] font-[500]  flex  items-center gap-2">
+                        {user?.AppointmentStatus === "currently_serving" && (
+
+                          <>
+                            <button
+                              onClick={() => {
+                                setSelectedId(user?._id);
+                                handleCancel(user?._id);
+                              }}
+                              className="bg-[#EE3131] text-nowrap hover:bg-teal-600 text-white px-2 py-1 h-[28px] rounded-md text-[12px] font-[500]"
+                            >
+                              <FaTimes size={20} />
+                            </button>
+                            <button
+                              onClick={() => {
+                                setSelectedId(user._id);
+                                setSelectedComplete(user);
+                                setSelectedType("Completed");
+                                handleComplete(user);
+                              }}
+                              className=" bg-[#28A745] text-nowrap hover:bg-teal-600 text-white px-2 py-1 h-[28px] rounded-md text-[12px] font-[500]"
+                            >
+                              <FaCheck size={20} />
+                            </button>
+                          </>
+                        )}
                         <button
                           onClick={() => {
                             setSelectedPet(user.petId);
@@ -123,7 +155,7 @@ const EnrollmentTable = ({
                           }}
                           className="bg-teal-500 text-nowrap hover:bg-teal-600 text-white px-4 py-1 h-[28px] rounded-md text-[12px] font-[500]"
                         >
-                          View Details
+                          <BsEye size={20} />
                         </button>
                       </td>
                     </tr>

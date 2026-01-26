@@ -146,6 +146,11 @@ const Enrollment = () => {
       <EnrollmentTable
         setSelectedPet={setSelectedPet}
         loading={loading}
+        setSelectedComplete={setSelectedComplete}
+        setSelectedType={setSelectedType} 
+        handleComplete={() => setAcceptModal(true)}
+        handleCancel={() => setCancelReasonModal(true)}
+        setSelectedId={setSelectedId}
         setSelectedCancel={setSelectedCancel}
         data={data}
         handleViewDetail={() => setPetDetailModal(true)}

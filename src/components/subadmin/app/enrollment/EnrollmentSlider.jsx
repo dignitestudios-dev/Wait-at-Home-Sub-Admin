@@ -18,6 +18,7 @@ const EnrollmentSlider = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [endShowModal, setEndShowModal] = useState(false);
+  const [modalType, setModalType] = useState("");
 
   const cancelledOrCompleted = data?.All?.filter(
     (u) =>
@@ -48,13 +49,13 @@ const EnrollmentSlider = ({
         </p>
       ) : (
         <>
-          <div className="flex justify-between items-center ">
+          {/* <div className="flex justify-between items-center ">
             {startTime?.isServingActive === false && (
               <button
                 onClick={() => setShowModal(true)}
                 className="bg-[#00AAAD] mb-4 flex gap-3 items-center  text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
               >
-                Start Time <PiClockUserDuotone size={18} />
+                Set Time Frames <PiClockUserDuotone size={18} />
               </button>
             )}
             {startTime?.isServingActive &&
@@ -81,8 +82,67 @@ const EnrollmentSlider = ({
               </button>
             )}
           </div>
-          <div className="flex items-center gap-5 overflow-x-auto no-scrollbar">
-            {/* LEFT: cancelled / completed */}
+           */}
+          {/* {Set Time Frames } */}
+          <div className="grid grid-cols-3">
+
+            {/* Column 1 */}
+            <div className="flex flex-col items-center justify-center border-r border-[#D6CBE3]">
+              <button
+                onClick={() => {
+                  setModalType("time");
+                  setShowModal(true);
+                }}
+                className="bg-[#00AAAD] mb-4 flex gap-3 items-center text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
+              >
+                Set Time Frames <PiClockUserDuotone size={18} />
+              </button>
+              <h2 className="text-[64px] text-[#5E2E86] font-[600] text-center">
+                {startTime?.averageWaitingTimeMinutes}
+              </h2>
+            </div>
+
+            {/* Column 2 */}
+            <div className="flex flex-col items-center justify-center border-r border-[#D6CBE3]">
+              <button
+                onClick={() => {
+                  setModalType("quantity");
+                  setShowModal(true);
+                }}
+                className="bg-[#00AAAD] mb-4 flex gap-3 items-center text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
+              >
+                Add Quantity <PiClockUserDuotone size={18} />
+              </button>
+              <h2 className="text-[64px] text-[#5E2E86] font-[600] text-center">
+              {startTime?.maxServings}
+              </h2>
+            </div>
+
+            {/* Column 3 (no right border) */}
+            <div className="flex flex-col items-center justify-center">
+              <button
+                onClick={() => {
+                  setSelectedId(currentlyServing?.[0]?._id);
+                  handleComplete(pendingUsers);
+                  setSelectedType("All");
+                }}
+                className="bg-[#00AAAD] mb-4 flex gap-3 items-center text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
+              >
+                Add Time <PiClockUserDuotone size={18} />
+              </button>
+              <h2 className="text-[64px] text-[#5E2E86] font-[600] text-center">
+                55
+              </h2>
+            </div>
+
+          </div>
+
+
+
+
+
+          {/* <div className="flex items-center gap-5 overflow-x-auto no-scrollbar">
+       
             {cancelledOrCompleted?.slice(0, 4).map((user, index) => (
               <div
                 key={index}
@@ -105,7 +165,6 @@ const EnrollmentSlider = ({
               </div>
             ))}
 
-            {/* CENTER: currently serving */}
             {data?.CurrentlyServing?.map((user, index) => (
               <div
                 key={index}
@@ -122,11 +181,8 @@ const EnrollmentSlider = ({
                     {user?.signUpRecord?.name?.substring(0, 2).toUpperCase()}
                   </div>
                 )}
-                {/* <p className="text-xs text-[#000000] font-[600] mt-1">
-                  -{user?.appointmentDuration} min
-                </p> */}
-
-                {/* Buttons */}
+               
+           
                 <div className="flex gap-2 mt-2">
                   <button
                     onClick={() => {
@@ -157,7 +213,7 @@ const EnrollmentSlider = ({
               </div>
             ))}
 
-            {/* RIGHT: pending */}
+          
             {pendingUsers?.slice(0, 4).map((user, index) => (
               <div
                 key={index}
@@ -174,12 +230,10 @@ const EnrollmentSlider = ({
                     {user?.signUpRecord?.name?.substring(0, 2).toUpperCase()}
                   </div>
                 )}
-                {/* <p className="text-xs text-[#5E2E86] font-[600] mt-1">
-                  {user?.appointmentDuration} min
-                </p> */}
+               
               </div>
             ))}
-          </div>
+          </div> */}
 
           <div className="text-[16px] font-[600] text-right mt-3 text-[#000000]">
             Total: {data?.Total}
@@ -188,6 +242,7 @@ const EnrollmentSlider = ({
       )}
       {showModal && (
         <StartTimeModal
+          type={modalType}
           setUpdate={setUpdate}
           onClose={() => setShowModal(false)}
         />
