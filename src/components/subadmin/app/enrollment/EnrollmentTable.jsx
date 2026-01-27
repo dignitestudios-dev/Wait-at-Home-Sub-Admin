@@ -123,31 +123,35 @@ const EnrollmentTable = ({
                       </td>
 
                       <td className="py-4 px-4  text-[12px] font-[500]  flex  items-center gap-2">
-                        {user?.AppointmentStatus === "currently_serving" && (
+                        {(
+                          user?.AppointmentStatus === "currently_serving" ||
+                          user?.AppointmentStatus === "pending"
+                        ) && (
+                            <>
+                              <button
+                                onClick={() => {
+                                  setSelectedId(user?._id);
+                                  handleCancel(user?._id);
+                                }}
+                                className="bg-[#EE3131] text-nowrap text-white px-2 py-1 h-[28px] rounded-md"
+                              >
+                                <FaTimes size={20} />
+                              </button>
 
-                          <>
-                            <button
-                              onClick={() => {
-                                setSelectedId(user?._id);
-                                handleCancel(user?._id);
-                              }}
-                              className="bg-[#EE3131] text-nowrap hover:bg-teal-600 text-white px-2 py-1 h-[28px] rounded-md text-[12px] font-[500]"
-                            >
-                              <FaTimes size={20} />
-                            </button>
-                            <button
-                              onClick={() => {
-                                setSelectedId(user._id);
-                                setSelectedComplete(user);
-                                setSelectedType("Completed");
-                                handleComplete(user);
-                              }}
-                              className=" bg-[#28A745] text-nowrap hover:bg-teal-600 text-white px-2 py-1 h-[28px] rounded-md text-[12px] font-[500]"
-                            >
-                              <FaCheck size={20} />
-                            </button>
-                          </>
-                        )}
+                              <button
+                                onClick={() => {
+                                  setSelectedId(user._id);
+                                  setSelectedComplete(user);
+                                  setSelectedType("Completed");
+                                  handleComplete(user);
+                                }}
+                                className="bg-[#28A745] text-nowrap text-white px-2 py-1 h-[28px] rounded-md"
+                              >
+                                <FaCheck size={20} />
+                              </button>
+                            </>
+                          )}
+
                         <button
                           onClick={() => {
                             setSelectedPet(user.petId);
