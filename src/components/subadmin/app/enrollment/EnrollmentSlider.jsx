@@ -37,9 +37,9 @@ const EnrollmentSlider = ({
       u.AppointmentStatus === "pending" &&
       new Date(u.AppointmentDate).toISOString().split("T")[0] === today
   );
-  const showAddTime =
-    Array.isArray(data?.CurrentlyServing) &&
-    data.CurrentlyServing.length > 0;
+  // const showAddTime =
+  //   Array.isArray(data?.AppointmentStatu ===) &&
+  //   data.AppointmentStatus.length > 0;
 
 
   return (
@@ -89,7 +89,7 @@ const EnrollmentSlider = ({
            */}
         {/* {Set Time Frames } */}
         <div
-          className={`grid ${showAddTime ? "grid-cols-3" : "grid-cols-2"
+          className={`grid ${pendingUsers?.length > 0 ? "grid-cols-3" : "grid-cols-2"
             }`}
         >
           {/* Column 1 */}
@@ -110,7 +110,7 @@ const EnrollmentSlider = ({
 
           {/* Column 2 */}
           <div
-            className={`flex flex-col items-center justify-center ${showAddTime ? "border-r border-[#D6CBE3]" : ""
+            className={`flex flex-col items-center justify-center ${pendingUsers?.length > 0 ? "border-r border-[#D6CBE3]" : ""
               }`}
           >
             <button
@@ -128,7 +128,7 @@ const EnrollmentSlider = ({
           </div>
 
           {/* Column 3 – Only when CurrentlyServing > 0 */}
-          {showAddTime && (
+          {pendingUsers?.length > 0 && (
             <div className="flex flex-col items-center justify-center">
               <button
                 onClick={() => {

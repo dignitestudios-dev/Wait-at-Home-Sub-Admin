@@ -124,8 +124,7 @@ const EnrollmentTable = ({
 
                       <td className="py-4 px-4  text-[12px] font-[500]  flex  items-center gap-2">
                         {(
-                          user?.AppointmentStatus === "currently_serving" ||
-                          user?.AppointmentStatus === "pending"
+                          user?.AppointmentStatus === "currently_serving"
                         ) && (
                             <>
                               <button
