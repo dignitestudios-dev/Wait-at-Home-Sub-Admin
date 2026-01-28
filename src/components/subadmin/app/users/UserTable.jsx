@@ -66,10 +66,10 @@ const UserTable = ({
                         <div className="w-[32px] h-[32px] rounded-full flex items-center justify-center text-[12px] font-bold bg-[#10C0B6] text-white">
                           {user?.name
                             ? user?.name
-                                .split(" ")
-                                .map((word) => word[0])
-                                .join("")
-                                .slice(0, 2)
+                              .split(" ")
+                              .map((word) => word[0])
+                              .join("")
+                              .slice(0, 2)
                             : ""}{" "}
                         </div>
                       )}
@@ -85,17 +85,17 @@ const UserTable = ({
                       {user.pets.length}
                     </td>
                     <td className="py-4 px-4 text-[12px] font-[500]">
-                      {user?.pets?.signUpRecord?.isUserRegistered ===true
-                        ? "Sign Up"
+                      {user?.signUpRecord?.isUserRegistered
+                        ? "Permanent"
                         : "Temporary"}
                     </td>
                     <td className="py-4 px-4 text-[12px] font-[500]">
                       {user?.createdAt
                         ? new Date(user.createdAt).toLocaleDateString("en-US", {
-                            month: "long", // "October" instead of "Oct"
-                            day: "2-digit",
-                            year: "numeric",
-                          })
+                          month: "long", // "October" instead of "Oct"
+                          day: "2-digit",
+                          year: "numeric",
+                        })
                         : "N/A"}
                     </td>
 

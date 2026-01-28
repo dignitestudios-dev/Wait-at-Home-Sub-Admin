@@ -55,7 +55,7 @@ const BarGrap = ({ graphData }) => {
       {
         label: "Cancellations",
         data: [0, cancelledAppointments], // cancelledAppointments second bar
-        backgroundColor: "#EE3131",
+        backgroundColor: "#5E2E86",
         barThickness: 40,
         borderRadius: {
           topRight: 20,

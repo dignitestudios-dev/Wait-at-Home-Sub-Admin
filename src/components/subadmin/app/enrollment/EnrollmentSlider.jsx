@@ -101,11 +101,17 @@ const EnrollmentSlider = ({
               }}
               className="bg-[#00AAAD] mb-4 flex gap-3 items-center text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
             >
-              Set Time Frames <PiClockUserDuotone size={18} />
+              Set Time Frame<PiClockUserDuotone size={18} />
             </button>
-            <h2 className="text-[64px] text-[#5E2E86] font-[600] text-center">
-              {startTime?.averageWaitingTimeMinutes}
+            <h2 className="text-[#5E2E86] font-[600] text-center">
+              <span className="text-[64px]">
+                {startTime?.averageWaitingTimeMinutes}
+              </span>
+              <span className="text-[20px] ml-2 font-[500] text-[#6B6B6B]">
+                minutes
+              </span>
             </h2>
+
           </div>
 
           {/* Column 2 */}
@@ -120,7 +126,7 @@ const EnrollmentSlider = ({
               }}
               className="bg-[#00AAAD] mb-4 flex gap-3 items-center text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
             >
-              Add Quantity <PiClockUserDuotone size={18} />
+              Select Number of Staff Members <PiClockUserDuotone size={18} />
             </button>
             <h2 className="text-[64px] text-[#5E2E86] font-[600] text-center">
               {startTime?.maxServings}
@@ -140,9 +146,16 @@ const EnrollmentSlider = ({
               >
                 Add Time <PiClockUserDuotone size={18} />
               </button>
-              <h2 className="text-[64px] text-[#5E2E86] font-[600] text-center">
-                {startTime?.lastTime || 0}
+              <h2 className="text-[#5E2E86] font-[600] text-center">
+                <span className="text-[64px]">
+                  {startTime?.lastTime || 0}
+                </span>
+                <span className="text-[20px] ml-2 font-[500] text-[#6B6B6B]">
+                  minutes
+                </span>
               </h2>
+
+
             </div>
           )}
         </div>

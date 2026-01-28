@@ -48,7 +48,7 @@ const StartTimeModal = ({ onClose, setUpdate, type }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-2xl p-6 w-[380px] shadow-lg animate-fadeIn">
         <h2 className="text-lg font-semibold mb-4 text-[#5E2E86]">
-          {type === "quantity" ? "Add Quantity" : "Set Time Frames"}
+          {type === "quantity" ? "Select Number of Staff Members " : "Set Time Frame"}
         </h2>
 
 
@@ -62,7 +62,7 @@ const StartTimeModal = ({ onClose, setUpdate, type }) => {
               type="number"
               value={maxServings}
               onChange={(e) => setMaxServings(e.target.value)}
-              placeholder="Enter quantity"
+              placeholder="Enter Number of Staff"
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#5E2E86]"
             />
           </div>
