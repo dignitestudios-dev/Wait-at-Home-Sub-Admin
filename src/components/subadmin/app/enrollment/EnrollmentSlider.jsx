@@ -127,7 +127,7 @@ const EnrollmentSlider = ({
             </h2>
           </div>
 
-          {/* Column 3 – Only when CurrentlyServing > 0 */}
+
           {pendingUsers?.length > 0 && (
             <div className="flex flex-col items-center justify-center">
               <button
