@@ -38,7 +38,7 @@ const AddTimeModal = ({
             <div className="relative right-10">
               <div className="flex">
                 <img
-                  src={AlertImg}
+                  src={loginlogo}
                   className="w-[107px] h-[107px] object-contain"
                   alt=""
                 />
