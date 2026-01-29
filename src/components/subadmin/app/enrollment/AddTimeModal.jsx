@@ -16,12 +16,12 @@ const AddTimeModal = ({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
-      <div className="bg-gradient-to-br from-[#A0E6E1] to-[#C3B4D3] w-[471px]  rounded-[32px] flex flex-col items-center p-6  justify-center">
+      <div className="bg-white w-[500px] rounded-[32px] flex flex-col items-center p-6  justify-center">
         <div
           onClick={onClose}
           className="flex ms-auto border cursor-pointer rounded-[4px] "
         >
-          <RxCross2 color="white" size={24} />
+          <RxCross2 color="black" size={24} />
         </div>
         <div className="flex justify-center">
           {selectedType === "All" ? (
@@ -29,7 +29,7 @@ const AddTimeModal = ({
             <div className="flex flex-col items-center">
               <img
                 src={AlertImg}
-                className="w-[107px] h-[107px] object-contain"
+                className="w-[60px] h-[60px] object-contain"
                 alt=""
               />
             </div>
@@ -64,9 +64,9 @@ const AddTimeModal = ({
           )}
         </div>
 
-        <h2 className="text-center capitalize text-[24px] font-[600] text-[#212121] mt-5">
+        <h2 className="text-center capitalize text-sm font-medium text-[#212121] mt-2">
           {selectedType === "All"
-            ? "Would you like to add extra time to your exam?"
+            ? "In the event that a specific patient or situation requires the waiting time to be extended, use this setting to add additional time to the entire waiting list. For example, if an emergency situation arises that requires several doctors to focus on one patient, you can push back the current wait time by 30 minutes for all patients."
             : "Are you sure you have completed the exam?"}
         </h2>
         {/* <p className="text-center text-[#565656] text-[16px] mt-1">
@@ -74,11 +74,11 @@ const AddTimeModal = ({
           wait times for all users currently in the queue.
         </p> */}
 
-        <div className="flex justify-between mt-6 gap-4">
+        <div className="flex justify-between mt-2 gap-4">
           {selectedType == "All" ? (
             <button
               onClick={onAddTime}
-              className="text-[14px] w-[204px] py-3 bg-red-500 text-white font-semibold rounded-[12px] shadow hover:bg-red-600"
+              className="px-4 py-2 bg-[#5E2E86] text-white rounded-lg hover:bg-[#4a236a]"
             >
               Add Time
             </button>
@@ -94,9 +94,9 @@ const AddTimeModal = ({
                 onClick={onClose}
                 className="text-[14px] w-[204px] py-3 bg-[#5E2E86] border border-gray-300 text-white font-semibold rounded-[12px] shadow"
               >
-              No
+                No
               </button>
-            
+
             </>
           )}
         </div>

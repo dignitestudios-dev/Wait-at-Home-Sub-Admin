@@ -93,6 +93,25 @@ const EnrollmentSlider = ({
             }`}
         >
           {/* Column 1 */}
+          <div
+            className={`flex flex-col items-center justify-center ${pendingUsers?.length > 0 ? "border-r border-[#D6CBE3]" : ""
+              }`}
+          >
+            <button
+              onClick={() => {
+                setModalType("quantity");
+                setShowModal(true);
+              }}
+              className="bg-[#00AAAD] mb-4 flex gap-3 items-center text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
+            >
+              Select Number of Staff Members <PiClockUserDuotone size={18} />
+            </button>
+            <h2 className="text-[64px] text-[#5E2E86] font-[600] text-center">
+              {startTime?.maxServings}
+            </h2>
+          </div>
+
+          {/* Column 2 */}
           <div className="flex flex-col items-center justify-center border-r border-[#D6CBE3]">
             <button
               onClick={() => {
@@ -112,25 +131,6 @@ const EnrollmentSlider = ({
               </span>
             </h2>
 
-          </div>
-
-          {/* Column 2 */}
-          <div
-            className={`flex flex-col items-center justify-center ${pendingUsers?.length > 0 ? "border-r border-[#D6CBE3]" : ""
-              }`}
-          >
-            <button
-              onClick={() => {
-                setModalType("quantity");
-                setShowModal(true);
-              }}
-              className="bg-[#00AAAD] mb-4 flex gap-3 items-center text-white px-4 py-2 h-[42px] rounded-lg text-sm font-semibold"
-            >
-              Select Number of Staff Members <PiClockUserDuotone size={18} />
-            </button>
-            <h2 className="text-[64px] text-[#5E2E86] font-[600] text-center">
-              {startTime?.maxServings}
-            </h2>
           </div>
 
 

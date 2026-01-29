@@ -46,7 +46,7 @@ const StartTimeModal = ({ onClose, setUpdate, type }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl p-6 w-[380px] shadow-lg animate-fadeIn">
+      <div className="bg-white rounded-2xl p-6 w-[500px] shadow-lg animate-fadeIn">
         <h2 className="text-lg font-semibold mb-4 text-[#5E2E86]">
           {type === "quantity" ? "Select Number of Staff Members " : "Set Time Frame"}
         </h2>
@@ -55,7 +55,9 @@ const StartTimeModal = ({ onClose, setUpdate, type }) => {
         {type === "quantity" && (
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1">
-              Number of staff on duty
+              Select how many doctors are in the clinic and can see patients during the session.
+              If you have a higher ratio of vet techs to doctors working, you may be able to select a
+              shorter time interval for each patient.
             </label>
             {/* <p className="text-[12px] text-gray-600 mb-3 ">Total staff available to serve pets.</p> */}
             <input
@@ -72,7 +74,13 @@ const StartTimeModal = ({ onClose, setUpdate, type }) => {
 
           <div className="mb-6">
             <label className="block text-sm font-medium mb-1">
-              Average exam time
+              Select an average time interval for each patient exam. For example, if two doctors are in
+              clinic, you can expect each patient to be seen within 15 minutes; if only 1 doctor is in
+              clinic; the interval may need to be 30 minutes.
+              If you are also taking appointments during this session, you may want to select a longer
+              interval to allow for spacing of patients from the virtual waiting list alongside
+              appointments. You can always adjust this time frame if something unexpected happens
+              or a staffing change occurs.
             </label>
             {/* <p className="text-[12px] text-gray-600 mb-3 ">Estimated time needed to serve each pet.</p> */}
 

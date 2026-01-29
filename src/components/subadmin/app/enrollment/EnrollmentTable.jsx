@@ -127,15 +127,6 @@ const EnrollmentTable = ({
                           user?.AppointmentStatus === "currently_serving"
                         ) && (
                             <>
-                              <button
-                                onClick={() => {
-                                  setSelectedId(user?._id);
-                                  handleCancel(user?._id);
-                                }}
-                                className="bg-[#EE3131] text-nowrap text-white px-2 py-1 h-[28px] rounded-md"
-                              >
-                                <FaTimes size={20} />
-                              </button>
 
                               <button
                                 onClick={() => {
@@ -148,6 +139,17 @@ const EnrollmentTable = ({
                               >
                                 <FaCheck size={20} />
                               </button>
+
+                              <button
+                                onClick={() => {
+                                  setSelectedId(user?._id);
+                                  handleCancel(user?._id);
+                                }}
+                                className="bg-[#EE3131] text-nowrap text-white px-2 py-1 h-[28px] rounded-md"
+                              >
+                                <FaTimes size={20} />
+                              </button>
+
                             </>
                           )}
 
