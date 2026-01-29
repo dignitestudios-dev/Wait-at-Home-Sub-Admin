@@ -12,7 +12,7 @@ const Navbar = () => {
           alt="admin-logo"
           className="h-12 w-12 object-contain"
         />
-        <h2 className="text-[18px] font-[500] text-black">Administrator Login</h2>
+        <h2 className="text-[18px] font-[500] text-black">Administrator Dashboard</h2>
       </div>
 
       <div className="flex items-center gap-3">

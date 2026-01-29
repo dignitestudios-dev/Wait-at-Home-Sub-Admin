@@ -19,12 +19,14 @@ import ChatClose from "./chatclose.png";
 import Logout from "./logout.png";
 import EditIcon from "./edit.png";
 import AlertImg from "./alertImg.png";
+import LoginLogo from "./loginlogo.png";
 import InactiveCheck from "./InactiveCheck.png";
 import ActiveCheck from "./activeCheck.png";
 export {
   Logo,
   EditIcon,
   AlertImg,
+  LoginLogo,
   InactiveCheck,
   ActiveCheck,
   IconCat,

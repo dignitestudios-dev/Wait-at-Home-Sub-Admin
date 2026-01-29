@@ -1,6 +1,6 @@
 import React from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
-import { AlertImg } from "../../../../assets/export";
+import { LoginLogo } from "../../../../assets/export";
 import { RxCross2 } from "react-icons/rx";
 
 const AddTimeModal = ({
@@ -28,7 +28,7 @@ const AddTimeModal = ({
             // Centered picture for "All"
             <div className="flex flex-col items-center">
               <img
-                src={AlertImg}
+                src={"/logo.png"}
                 className="w-[60px] h-[60px] object-contain"
                 alt=""
               />
@@ -38,7 +38,7 @@ const AddTimeModal = ({
             <div className="relative right-10">
               <div className="flex">
                 <img
-                  src={loginlogo}
+                  src={AlertImg}
                   className="w-[107px] h-[107px] object-contain"
                   alt=""
                 />
