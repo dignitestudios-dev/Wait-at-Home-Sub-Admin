@@ -22,7 +22,7 @@ const ViewCancelReason = ({ isOpen, onClose, selectedCancel }) => {
         <textarea
           placeholder="Write here"
           disabled
-          value={selectedCancel}
+          value={selectedCancel ? selectedCancel : "No Reason Provided."}
           className={`bg-gray-100 cursor-not-allowed opacity-60 w-full mt-7 rounded-[20px] h-[113px] px-4 py-4 border `}
         ></textarea>
       </div>

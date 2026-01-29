@@ -42,16 +42,20 @@ const Enrollment = () => {
       setErrorReasonDiscription("");
     }
   };
-  const handleCancelSubmit = async () => {
-    if (!cancelReasonDiscription.trim()) {
+  const handleCancelSubmit = async (skip = false) => {
+    // ensure only strict boolean true is treated as a skip (defensive against event arg)
+    const isSkip = skip === true;
+    if (!isSkip && !cancelReasonDiscription.trim()) {
       setErrorReasonDiscription("Please fill in the description.");
       return;
     }
     const payload = {
       appointmentId: selectedId,
-      cancelReason: cancelReasonDiscription,
+      cancelReason: isSkip ? "" : cancelReasonDiscription,
       action: "cancelled",
     };
+    // clear previous error when attempting submit
+    setErrorReasonDiscription("");
     setCancelLoading(true);
     try {
       const response = await axios.post(
@@ -147,7 +151,7 @@ const Enrollment = () => {
         setSelectedPet={setSelectedPet}
         loading={loading}
         setSelectedComplete={setSelectedComplete}
-        setSelectedType={setSelectedType} 
+        setSelectedType={setSelectedType}
         handleComplete={() => setAcceptModal(true)}
         handleCancel={() => setCancelReasonModal(true)}
         setSelectedId={setSelectedId}

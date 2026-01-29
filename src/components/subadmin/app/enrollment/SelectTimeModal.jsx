@@ -23,8 +23,8 @@ const SelectTimeModal = ({ isOpen, onClose, onAddTime, timeLoading }) => {
         {/* Close Button */}
         <div className="flex items-center justify-between mb-3 ">
           {/* Title */}
-          <h2 className="text-lg font-semibold  text-gray-800">
-            Would You Like To Add More Time
+          <h2 className="text-lg font-semibold text-gray-800">
+            Select How Much Time Needs to be Added
           </h2>
           <div
             onClick={onClose}

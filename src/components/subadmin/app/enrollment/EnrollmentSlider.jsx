@@ -259,9 +259,9 @@ const EnrollmentSlider = ({
             ))}
           </div> */}
 
-        <div className="text-[16px] font-[600] text-right mt-3 text-[#000000]">
+        {/* <div className="text-[16px] font-[600] text-right mt-3 text-[#000000]">
           Total: {data?.Total}
-        </div>
+        </div> */}
       </>
 
       {showModal && (

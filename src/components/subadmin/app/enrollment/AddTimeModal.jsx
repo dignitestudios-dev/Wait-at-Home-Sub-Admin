@@ -1,6 +1,6 @@
 import React from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
-import { LoginLogo } from "../../../../assets/export";
+import { AlertImg } from "../../../../assets/export";
 import { RxCross2 } from "react-icons/rx";
 
 const AddTimeModal = ({
@@ -17,12 +17,20 @@ const AddTimeModal = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
       <div className="bg-white w-[500px] rounded-[32px] flex flex-col items-center p-6  justify-center">
-        <div
-          onClick={onClose}
-          className="flex ms-auto border cursor-pointer rounded-[4px] "
-        >
-          <RxCross2 color="black" size={24} />
+        {/* Close Button */}
+        <div className="w-full flex items-center justify-between mb-3 ">
+          {/* Title */}
+          <h2 className="text-lg font-semibold text-[#5E2E86]">
+            Add Time
+          </h2>
+          <div
+            onClick={onClose}
+            className="flex ms-auto border cursor-pointer rounded-[4px] "
+          >
+            <RxCross2 color="black" size={24} />
+          </div>
         </div>
+
         <div className="flex justify-center">
           {selectedType === "All" ? (
             // Centered picture for "All"
@@ -64,7 +72,7 @@ const AddTimeModal = ({
           )}
         </div>
 
-        <h2 className="text-center capitalize text-sm font-medium text-[#212121] mt-2">
+        <h2 className="text-center capitalize text-sm font-medium text-[#212121] mt-8">
           {selectedType === "All"
             ? "In the event that a specific patient or situation requires the waiting time to be extended, use this setting to add additional time to the entire waiting list. For example, if an emergency situation arises that requires several doctors to focus on one patient, you can push back the current wait time by 30 minutes for all patients."
             : "Are you sure you have completed the exam?"}

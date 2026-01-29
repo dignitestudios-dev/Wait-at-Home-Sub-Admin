@@ -22,7 +22,8 @@ const CancelReasonModal = ({
           </h2>
           <button
             onClick={onClose}
-            className="h-[36px] w-[36px] bg-white flex justify-center items-center rounded-full right-4 text-xl font-bold text-gray-700 hover:text-black"
+            disabled={cancelloading}
+            className={`h-[36px] w-[36px] bg-white flex justify-center items-center rounded-full right-4 text-xl font-bold text-gray-700 hover:text-black ${cancelloading ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             <RxCross2 />
           </button>
@@ -32,22 +33,30 @@ const CancelReasonModal = ({
           placeholder="Write here"
           value={cancelReasonDiscription}
           onChange={handleChange}
-          className={`bg-white w-full mt-7 rounded-[20px] h-[113px] px-4 py-4 border  ${
-            errorReasonDiscription
-              ? "border-red-500 ring-1 ring-red-500"
-              : "focus:border-[#10C0B6] focus:ring-2 focus:ring-[#10C0B6]"
-          }`}
+          disabled={cancelloading}
+          className={`bg-white w-full mt-7 rounded-[20px] h-[113px] px-4 py-4 border disabled:cursor-not-allowed disabled:bg-gray-100 ${errorReasonDiscription
+            ? "border-red-500 ring-1 ring-red-500"
+            : "focus:border-[#10C0B6] focus:ring-2 focus:ring-[#10C0B6]"
+            }`}
         ></textarea>
         {errorReasonDiscription && (
           <p className="text-red-500 text-sm mt-1">{errorReasonDiscription}</p>
         )}
         <div className="flex flex-col justify-center items-center space-y-3 mt-10">
-          <div className="text-[18px] font-[600] cursor-pointer text-[#00000080]"     onClick={onClose}>Skip</div>
+          <button
+            type="button"
+            onClick={() => handleClick(true)}
+            disabled={cancelloading}
+            className={`text-[18px] font-[600] ${cancelloading ? 'text-gray-400 cursor-not-allowed' : 'cursor-pointer text-[#00000080]'}`}
+          >
+            Skip
+          </button>
           <GlobalButton
             type="submit"
             children={"Submit"}
             loading={cancelloading}
-            onClick={handleClick}
+            disabled={cancelloading}
+            onClick={() => handleClick(false)}
           />
         </div>
       </div>
