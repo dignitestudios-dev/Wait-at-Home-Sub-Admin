@@ -15,7 +15,7 @@ const CancelReasonModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-      <div className="bg-gradient-to-br from-[#A0E6E1] to-[#C3B4D3] w-[471px] p-8 rounded-3xl shadow-lg relative text-gray-800">
+      <div className="bg-white w-[471px] p-8 rounded-3xl shadow-lg relative text-gray-800">
         <div className="flex justify-between border-b border-[#FFFFFF] pb-5">
           <h2 className="text-[18px] font-[600] text-[#212121] mb-2">
             Cancellation Reason
@@ -34,7 +34,7 @@ const CancelReasonModal = ({
           value={cancelReasonDiscription}
           onChange={handleChange}
           disabled={cancelloading}
-          className={`bg-white w-full mt-7 rounded-[20px] h-[113px] px-4 py-4 border disabled:cursor-not-allowed disabled:bg-gray-100 ${errorReasonDiscription
+          className={`bg-white w-full mt-7 rounded-[20px] h-[113px] px-4 py-4  border-2 border-black disabled:cursor-not-allowed disabled:bg-gray-100 ${errorReasonDiscription
             ? "border-red-500 ring-1 ring-red-500"
             : "focus:border-[#10C0B6] focus:ring-2 focus:ring-[#10C0B6]"
             }`}

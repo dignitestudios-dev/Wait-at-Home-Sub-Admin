@@ -20,9 +20,9 @@ const AddTimeModal = ({
         {/* Close Button */}
         <div className="w-full flex items-center justify-between mb-3 ">
           {/* Title */}
-          <h2 className="text-lg font-semibold text-[#5E2E86]">
+          {/* <h2 className="text-lg font-semibold text-[#5E2E86]">
             Add Time
-          </h2>
+          </h2> */}
           <div
             onClick={onClose}
             className="flex ms-auto border cursor-pointer rounded-[4px] "
@@ -35,11 +35,11 @@ const AddTimeModal = ({
           {selectedType === "All" ? (
             // Centered picture for "All"
             <div className="flex flex-col items-center">
-              <img
+              {/* <img
                 src={"/logo.png"}
                 className="w-[60px] h-[60px] object-contain"
                 alt=""
-              />
+              /> */}
             </div>
           ) : (
             // Default overlay layout
@@ -72,10 +72,17 @@ const AddTimeModal = ({
           )}
         </div>
 
-        <h2 className="text-center capitalize text-sm font-medium text-[#212121] mt-8">
-          {selectedType === "All"
-            ? "In the event that a specific patient or situation requires the waiting time to be extended, use this setting to add additional time to the entire waiting list. For example, if an emergency situation arises that requires several doctors to focus on one patient, you can push back the current wait time by 30 minutes for all patients."
-            : "Are you sure you have completed the exam?"}
+        <h2 className="text-center  text-sm font-medium text-[#212121] mt-10 ">
+          {selectedType === "All" ? (
+            <>
+              In the event that a specific patient or situation requires the waiting time to be extended, use this setting to add additional time to the entire waiting list.
+              <br />
+              For example, if an emergency situation arises that requires several doctors to focus on one patient, you can push back the current wait time by 30 minutes for all patients.
+            </>
+          ) : (
+            "Are you sure you have completed the exam?"
+          )}
+
         </h2>
         {/* <p className="text-center text-[#565656] text-[16px] mt-1">
           Please be aware that extending the session will affect the estimated
