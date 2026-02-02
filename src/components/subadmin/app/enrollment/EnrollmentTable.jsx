@@ -17,6 +17,12 @@ const EnrollmentTable = ({
   setSelectedComplete,
   setSelectedType
 }) => {
+  const getStatusLabel = (status) => {
+    if (status === "currently_serving") return "In Exam";
+    if (status === "pending") return "Waiting";
+    return status;
+  };
+
   return (
     <div className="mt-6">
       {loading ? (
@@ -103,7 +109,7 @@ const EnrollmentTable = ({
                           )
                           : "N/A"}
                       </td>
-                        <td className="py-4 px-4 text-[12px] font-[500]">
+                      <td className="py-4 px-4 text-[12px] font-[500]">
                         {user?.AppointmentStatus === "cancelled" ? (
                           <button
                             className="capitalize"
@@ -112,19 +118,20 @@ const EnrollmentTable = ({
                               handleViewCancel(user);
                             }}
                           >
-                            {formatStatus(user.AppointmentStatus === "currently_serving" ? "In Exam" : user.AppointmentStatus || user.AppointmentStatus === "pending" ? "Waiting" : user.AppointmentStatus)}
+                            {formatStatus(getStatusLabel(user.AppointmentStatus))}
                           </button>
                         ) : (
-                          formatStatus(user.AppointmentStatus === "currently_serving" ? "In Exam" : user.AppointmentStatus || user.AppointmentStatus === "pending" ? "Waiting" : user.AppointmentStatus)
+                          formatStatus(getStatusLabel(user.AppointmentStatus))
                         )}
                       </td>
+
                       <td className="py-4 px-4 text-[12px] font-[500] max-w-[150px] overflow-hidden whitespace-nowrap truncate">
                         {user?.actionBy || "N/A"}
                       </td>
-                    
+
 
                       <td className="py-4 px-4  text-[12px] font-[500]  flex  items-center gap-2">
-                        
+
                         <button
                           onClick={() => {
                             setSelectedPet(user.petId);
