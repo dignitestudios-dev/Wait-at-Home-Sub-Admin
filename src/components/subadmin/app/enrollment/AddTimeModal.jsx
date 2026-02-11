@@ -2,6 +2,7 @@ import React from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { AlertImg } from "../../../../assets/export";
 import { RxCross2 } from "react-icons/rx";
+import SelectTimeModalV2 from "./SelectTimeModalV2";
 
 const AddTimeModal = ({
   user,
@@ -11,6 +12,10 @@ const AddTimeModal = ({
   onComplete,
   loading,
   selectedType,
+  timeLoading,
+  isOpenSelectTime,
+  onCloseSelectTime,
+  onAddTimeSelectTime
 }) => {
   if (!isOpen) return null;
 
@@ -23,12 +28,12 @@ const AddTimeModal = ({
           {/* <h2 className="text-lg font-semibold text-[#5E2E86]">
             Add Time
           </h2> */}
-          <div
+          {/* <div
             onClick={onClose}
             className="flex ms-auto border cursor-pointer rounded-[4px] "
           >
             <RxCross2 color="black" size={24} />
-          </div>
+          </div> */}
         </div>
 
         <div className="flex justify-center">
@@ -94,14 +99,33 @@ const AddTimeModal = ({
           wait times for all users currently in the queue.
         </p> */}
 
-        <div className="flex justify-between mt-2 gap-4">
+        {/* Select Time */}
+        <SelectTimeModalV2
+          timeLoading={timeLoading}
+          isOpenSelectTime={isOpenSelectTime}
+          onCloseSelectTime={onCloseSelectTime}
+          onAddTimeSelectTime={onAddTimeSelectTime}
+        />
+
+        <div className="w-full flex justify-end mt-5 gap-4">
           {selectedType == "All" ? (
-            <button
-              onClick={onAddTime}
-              className="px-4 py-2 bg-[#5E2E86] text-white rounded-lg hover:bg-[#4a236a]"
-            >
-              Add Time
-            </button>
+            <>
+              <button
+                onClick={onClose}
+                className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+
+              {!isOpenSelectTime && <button
+                onClick={onAddTime}
+                className="px-4 py-2 bg-[#5E2E86] text-white rounded-lg hover:bg-[#4a236a]"
+              >
+                Add Time
+              </button>}
+
+
+            </>
           ) : (
             <>
               <button

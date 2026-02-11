@@ -115,6 +115,7 @@ const Enrollment = () => {
       if (response?.status === 200) {
         SuccessToast(response?.data?.message);
         setShowAddTimeModal(false);
+        setAcceptModal(false)
         setUpdate((prev) => !prev);
       }
     } catch (error) {
@@ -185,9 +186,13 @@ const Enrollment = () => {
         isOpen={cancelSuccessFull}
         onClose={() => setCancelSuccessFull(false)}
       />
+
       <AddTimeModal
         selectedType={selectedType}
-        onClose={() => setAcceptModal(false)}
+        onClose={() => {
+          setAcceptModal(false)
+          setShowAddTimeModal(false)
+        }}
         loading={completeLoading}
         isOpen={acceptModal}
         user={{
@@ -195,17 +200,23 @@ const Enrollment = () => {
           profilePicture: selectedComplete?.signUpRecord?.profilePicture,
         }}
         onAddTime={() => {
-          setAcceptModal(false);
+          // setAcceptModal(false);
           setShowAddTimeModal(true);
         }}
         onComplete={handleComplete}
+
+        // select time props
+        timeLoading={timeLoading}
+        isOpenSelectTime={showAddTimeModal}
+        onCloseSelectTime={() => setShowAddTimeModal(false)}
+        onAddTimeSelectTime={({ hours, minutes }) => handleAddTime(hours, minutes)}
       />
-      <SelectTimeModal
+      {/* <SelectTimeModal
         timeLoading={timeLoading}
         isOpen={showAddTimeModal}
         onClose={() => setShowAddTimeModal(false)}
         onAddTime={({ hours, minutes }) => handleAddTime(hours, minutes)}
-      />
+      /> */}
     </div>
   );
 };
